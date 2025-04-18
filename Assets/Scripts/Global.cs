@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Global : MonoBehaviour
@@ -18,6 +19,7 @@ public class Global : MonoBehaviour
     private int seed;
 
     public GameObject connector;
+    public GameObject finishBtn;
     public int wireOhm;
     public int wireID = 0; 
     //0: None Selected
@@ -106,6 +108,14 @@ public class Global : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) //Right Click
         {
             wireID = 0; //Unselect
+            RedistributePower();
+        }
+
+        
+    }
+
+    public void RedistributePower()
+    {
             connector = null;
             PowerReset();
             for (int i = 0; i < GetGeneratorsLength(); i++)
@@ -114,9 +124,6 @@ public class Global : MonoBehaviour
                 ConsumerClear();
             }
             ConsumerChange();
-        }
-
-        
     }
 
     public void ConsumerClear()
@@ -331,7 +338,17 @@ public class Global : MonoBehaviour
             staticValues.GetComponent<AudioManager>().Play("PowerOff"); 
         }
         consumersOn = on;
+        GameEndCheck(on);
     }
+
+    public void GameEndCheck(int PoweredCons)
+    {
+        if((PoweredCons >= 2 && finishBtn.activeSelf == false) || (PoweredCons < 2 && finishBtn.activeSelf == true)) //Variable not set to Consumers.Length for testing purposes
+        {
+            finishBtn.SetActive(!finishBtn.activeSelf);
+        }
+    }
+
     public void Play(String sound)
     {
         staticValues.GetComponent<AudioManager>().Play(sound);

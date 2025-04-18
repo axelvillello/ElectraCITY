@@ -95,7 +95,7 @@ public class WireConnection : MonoBehaviour
             otherWire.selected = true;
             global.connector = otherConnector;
             //Delete Previous
-            global.wireOhm =otherWire.resistance;
+            global.wireOhm = otherWire.resistance;
             otherWire.otherConnector = null;
             otherConnector = null;
             //Wire Type change
@@ -136,27 +136,21 @@ public class WireConnection : MonoBehaviour
                     lineRenderer.SetPosition(1, lineRenderer.GetPosition(0));
                     lineRenderer.Simplify(1f);
                     selected = false;
-                    global.connector = null;
                     resistance = global.wireOhm;
+                    global.wireID = 0; //Unselect
+                    global.RedistributePower();
                 }
                 else
                 {
                     otherConnector = global.connector; //Other Connector
                     WireConnection otherWire = otherConnector.GetComponent<WireConnection>();
-                    otherWire.otherConnector = this.gameObject; //Other Connector's Connectror is this
-                    global.connector = null; //Reset Clicks
+                    otherWire.otherConnector = this.gameObject; //Other Connector's Connector is this
                     resistance = global.wireOhm;
                     otherWire.resistance = global.wireOhm;
                     //Debug.Log("Connection Made");
-                    global.PowerReset();
-                    for (int i = 0; i < global.GetGeneratorsLength();i++)
-                    {
-                        global.GetGeneratorsIndex(i).GetComponent<Generators>().Plant();
-                        global.ConsumerClear();
-                    }
+                    global.RedistributePower();
                     selected = false;
                     //Add for sucessful connection
-                    global.ConsumerChange();
                 }
             }
             else //First Connector
