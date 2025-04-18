@@ -16,6 +16,8 @@ public class MenuButtons : MonoBehaviour
         staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
         audio = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<AudioManager>();
     }
+
+
     public void OnStartButton()
     {
         ScreenToOpen.SetActive(!ScreenToOpen.activeSelf);
@@ -40,6 +42,7 @@ public class MenuButtons : MonoBehaviour
         ScreenToOpen.SetActive(!ScreenToOpen.activeSelf);
         audio.Play("MenuClick");
     }
+
     public void OnStartStartButton()
     {
         staticValues.seed = ScreenToOpen.GetComponentInChildren<TMP_InputField>().text;
@@ -50,6 +53,12 @@ public class MenuButtons : MonoBehaviour
     public void OnOptionsApplyButton()
     {
         staticValues.SetVolume(ScreenToOpen.GetComponentInChildren<Slider>().value);
+        audio.Play("MenuClick");
+    }
+
+    public void OnFinishButton()
+    {
+        ScreenToOpen.SetActive(!ScreenToOpen.activeSelf);
         audio.Play("MenuClick");
     }
 }
