@@ -17,6 +17,7 @@ public class Global : MonoBehaviour
 
     private StaticValues staticValues;
     private int seed;
+    public Boolean wireSelected;
 
     public GameObject connector;
     public GameObject finishBtn;
@@ -35,7 +36,7 @@ public class Global : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
+            //DontDestroyOnLoad(instance);
         }
         else
         {
@@ -75,8 +76,8 @@ public class Global : MonoBehaviour
         {
             case 0:
                 //Scenario 0 (Base Scenario)
-                scenario.setGen(3);
-                scenario.setCon(20);
+                scenario.setGen(4);
+                scenario.setCon(30);
                 break;
             case 1:
                 //Scenario 1 (No Super, Only 2 Gens)
@@ -107,7 +108,6 @@ public class Global : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1)) //Right Click
         {
-            wireID = 0; //Unselect
             RedistributePower();
         }
 
@@ -379,4 +379,7 @@ public class Global : MonoBehaviour
         }
         return totalScore;
     }
-}
+
+    public int getTotalPoweredCons(){return consumersOn;}
+    public int getTotalConsumers(){return Consumers.Length;}
+}   

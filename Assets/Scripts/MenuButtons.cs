@@ -61,4 +61,18 @@ public class MenuButtons : MonoBehaviour
         ScreenToOpen.SetActive(!ScreenToOpen.activeSelf);
         audio.Play("MenuClick");
     }
+
+    public void OnReturnToMenuButton()
+    {
+        audio.Play("MenuClick");
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        //SceneManager.UnloadSceneAsync(1);
+    }
+
+    public void OnRetryButton()
+    {
+        audio.Play("MenuClick");
+        SceneManager.LoadScene(1);
+    }
+
 }

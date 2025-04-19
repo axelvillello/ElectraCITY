@@ -28,17 +28,23 @@ public class WireConnection : MonoBehaviour
     void Update()
     {
         if (selected)
-        {
+        {   
+            global.wireSelected = true;
             Vector3 startPos = lineRenderer.GetPosition(0);
             Vector3 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             lineRenderer.SetPosition(1, Vector3.MoveTowards(startPos, endPos, maxDelta));
 
             if (global.connector == null)
             {
+                global.wireSelected = false;
                 selected = false;
                 lineRenderer.SetPosition(1, transform.position);
                 lineRenderer.Simplify(1f);
             }
+        }
+        else
+        {
+            
         }
         if(otherConnector)
         {
@@ -137,7 +143,7 @@ public class WireConnection : MonoBehaviour
                     lineRenderer.Simplify(1f);
                     selected = false;
                     resistance = global.wireOhm;
-                    global.wireID = 0; //Unselect
+                    //global.wireID = 0; //Unselect
                     global.RedistributePower();
                 }
                 else
@@ -150,7 +156,6 @@ public class WireConnection : MonoBehaviour
                     //Debug.Log("Connection Made");
                     global.RedistributePower();
                     selected = false;
-                    //Add for sucessful connection
                 }
             }
             else //First Connector
