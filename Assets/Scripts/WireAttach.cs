@@ -63,21 +63,28 @@ public class WireAttach : MonoBehaviour
     }
 
     public void Attach()
-    {
-        global.Play("Click1");
-        //Global set of which wire selected
-        if (!selected)
+    {   
+        if (!global.wireSelected)
         {
-            global.wireID = wireId;
-            global.wireOhm = wireOhm;
-            current.sprite = pressed;
-            selected = true;
+            global.Play("Click1");
+            //Global set of which wire selected
+            if (!selected)
+            {
+                global.wireID = wireId;
+                global.wireOhm = wireOhm;
+                current.sprite = pressed;
+                selected = true;
+            }
+            else if (global.connector != null)
+            {
+                global.wireID = 0;
+                selected = false;
+            }
+            else
+            {
+                global.wireID = 0;
+                global.wireSelected = false;
+            }
         }
-        else if (global.connector != null)
-        {
-            global.wireID = 0;
-            selected = false;
-        }
-        
     }
 }
