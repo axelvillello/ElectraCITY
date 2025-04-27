@@ -10,6 +10,7 @@ public class MenuButtons : MonoBehaviour
     [SerializeField] GameObject ScreenToOpen;
     private StaticValues staticValues;
     private AudioManager audio;
+    private ResultScreen ScoreDisplay;
 
     private void Start()
     {

@@ -11,6 +11,7 @@ public class Generators : MonoBehaviour
     Queue<GameObject> queue;
     [SerializeField] int powerGen;
     int totalConnectionsCost;
+    int blackWireTotal, redWireTotal, yellowWireTotal;
 
     private void Start()
     {
@@ -89,10 +90,26 @@ public class Generators : MonoBehaviour
         }
         queue.Clear();
         totalConnectionsCost = 0;
+        blackWireTotal = 0;
+        redWireTotal = 0;
+        yellowWireTotal = 0;
         for (int i = 0; i < tree.Count; i++)
         {
             Debug.Log(tree[i].getSelf() + " from " + tree[i].getOrigin() + " at resistance " + tree[i].getResistance());
             totalConnectionsCost += tree[i].getCost();
+            
+            switch (tree[i].getResistance())
+            {
+                case 3:
+                    blackWireTotal++;
+                    break;
+                case 1:
+                    redWireTotal++;
+                    break;
+                case 0:
+                    yellowWireTotal++;
+                    break;
+            }
         }
         return tree;
     }
@@ -130,10 +147,15 @@ public class Generators : MonoBehaviour
                 }
             }
         }
-    }
+    } 
 
     public int getTotalConnectionsCost()
     {
         return totalConnectionsCost;
     }
+
+    public (int black, int red, int yellow) getTotalWires()
+    {
+        return(blackWireTotal, redWireTotal, yellowWireTotal);
+    } 
 }
