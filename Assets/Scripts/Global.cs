@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
@@ -380,6 +381,19 @@ public class Global : MonoBehaviour
         return totalScore;
     }
 
+    public (int black, int red, int yellow) getWireScores()     
+    {
+        int black = 0 , red = 0, yellow = 0;
+        foreach (GameObject gen in Generators)
+        {
+            Generators genSc = gen.GetComponent<Generators>();
+            var wireTotals = genSc.getTotalWires();
+            black += wireTotals.black;
+            red += wireTotals.red;
+            yellow += wireTotals.yellow;
+        }
+        return (black, red, yellow);
+    }
     public int getTotalPoweredCons(){return consumersOn;}
     public int getTotalConsumers(){return Consumers.Length;}
 }   
