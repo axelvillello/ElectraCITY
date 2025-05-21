@@ -17,6 +17,7 @@ public class Consumers : MonoBehaviour
     private List<GameObject> consumers;
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] GameObject source;
+    [SerializeField] Sprite[] lightbulbSprites;
     [SerializeField] Sprite[] sprites;
 
     private void Awake()
@@ -40,11 +41,11 @@ public class Consumers : MonoBehaviour
     {
         if (isPowerOn())
         {
-            source.GetComponent<SpriteRenderer>().color = Color.yellow;
+            source.GetComponent<SpriteRenderer>().sprite = lightbulbSprites[1];
         }
         else
         {
-            source.GetComponent<SpriteRenderer>().color = Color.black;
+            source.GetComponent<SpriteRenderer>().sprite = lightbulbSprites[0];
         }
     }
 
