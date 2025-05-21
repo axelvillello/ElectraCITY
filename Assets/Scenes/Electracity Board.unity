@@ -1768,7 +1768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!223 &1340805501
 Canvas:
   m_ObjectHideFlags: 0
@@ -3189,6 +3189,18 @@ PrefabInstance:
       propertyPath: progress
       value: 
       objectReference: {fileID: 852268174}
+    - target: {fileID: 5761283201038718987, guid: 0e03182516865484289e2e36b0d86631, type: 3}
+      propertyPath: m_Color.b
+      value: 0.45225722
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761283201038718987, guid: 0e03182516865484289e2e36b0d86631, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761283201038718987, guid: 0e03182516865484289e2e36b0d86631, type: 3}
+      propertyPath: m_Color.r
+      value: 0.3460751
+      objectReference: {fileID: 0}
     - target: {fileID: 7443597826122408611, guid: 0e03182516865484289e2e36b0d86631, type: 3}
       propertyPath: m_Name
       value: UI

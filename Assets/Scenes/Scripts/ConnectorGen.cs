@@ -18,8 +18,8 @@ public class ConnectorGen : MonoBehaviour
     public void GenerateConnectors()
     {
         Connectors = new GameObject[ConnectorNumber];
-        float currentPosx = transform.position.x;
-        float currentPosy = transform.position.y - 75f; //Below Consumer
+        float currentPosx = transform.position.x; //Centered with consumer
+        float currentPosy = transform.position.y - 75f; //Below consumer
         float currentPosz = transform.position.z;
         GameObject tempConnector;
 
