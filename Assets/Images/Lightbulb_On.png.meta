@@ -116,10 +116,10 @@ TextureImporter:
       name: Lightbulb_On_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 0
-        width: 44
-        height: 56
+        x: 17
+        y: 7
+        width: 46
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

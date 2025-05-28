@@ -344,7 +344,7 @@ public class Global : MonoBehaviour
 
     public void GameEndCheck(int PoweredCons)
     {
-        if((PoweredCons >= 2 && finishBtn.activeSelf == false) || (PoweredCons < 2 && finishBtn.activeSelf == true)) //Variable not set to Consumers.Length for testing purposes
+        if((PoweredCons >= 1 && finishBtn.activeSelf == false) || (PoweredCons < 1 && finishBtn.activeSelf == true)) //Variable not set to Consumers.Length for testing purposes
         {
             finishBtn.SetActive(!finishBtn.activeSelf);
         }
