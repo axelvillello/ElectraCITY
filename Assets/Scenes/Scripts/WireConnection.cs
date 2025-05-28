@@ -23,12 +23,13 @@ public class WireConnection : MonoBehaviour
         global = GameObject.FindGameObjectWithTag("Global").GetComponent<Global>();
         lineRenderer.startWidth = 0.15f;
         lineRenderer.endWidth = 0.15f;
+        lineRenderer.sortingOrder = 3;
         parent = this.transform.parent.gameObject;
     }
     void Update()
     {
         if (selected)
-        {   
+        {
             global.wireSelected = true;
             Vector3 startPos = lineRenderer.GetPosition(0);
             Vector3 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -44,13 +45,17 @@ public class WireConnection : MonoBehaviour
         }
         else
         {
-            
+
         }
-        if(otherConnector)
+
+        if (otherConnector)
         {
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, otherConnector.transform.position);
+            otherConnector.GetComponent<Renderer>().material.SetColor("_Color", lineRenderer.startColor);
+
         }
+        
     }
 
     private void OnMouseDown()
@@ -58,7 +63,7 @@ public class WireConnection : MonoBehaviour
         if (global.wireID != 0)
         {
             global.Play("Click" + random.Next(1, 4).ToString());
-        }  
+        }
         //If object has other connector it is wired
         //If global connector is not null, wire is being dragged
         if (!otherConnector)
@@ -89,7 +94,7 @@ public class WireConnection : MonoBehaviour
                 maxDelta = 10000;
                 break;
         }
-        if (otherConnector && global.connector==null)
+        if (otherConnector && global.connector == null)
         {
             //Move Connection
             /////////////////////
@@ -100,21 +105,23 @@ public class WireConnection : MonoBehaviour
             WireConnection otherWire = otherConnector.GetComponent<WireConnection>();
             otherWire.selected = true;
             global.connector = otherConnector;
+            global.connector.GetComponent<Renderer>().material.SetColor("_Color", lineRenderer.startColor);
             //Delete Previous
+            otherWire.otherConnector.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
             global.wireOhm = otherWire.resistance;
             otherWire.otherConnector = null;
             otherConnector = null;
             //Wire Type change
             global.wireID = wireType;
         }
-        else if(otherConnector && global.connector != null)
+        else if (otherConnector && global.connector != null)
         {
             //Space for incorrect selection effects
             return;
         }
         else if (global.wireID != 0)
         {
-            if(global.connector != null) //If Another Connector is Selected
+            if (global.connector != null) //If Another Connector is Selected
             {
                 if ((global.connector.transform.position - transform.position).magnitude > maxDelta)
                 {
@@ -123,13 +130,13 @@ public class WireConnection : MonoBehaviour
                     return;
                 }
                 bool same = false;
-                foreach(Transform item in global.connector.GetComponent<WireConnection>().transform.parent.transform)
+                foreach (Transform item in global.connector.GetComponent<WireConnection>().transform.parent.transform)
                 {
                     if (item.tag == "Connector")
                     {
-                        if(item.GetComponent<WireConnection>().otherConnector != null)
+                        if (item.GetComponent<WireConnection>().otherConnector != null)
                         {
-                            if(item.GetComponent<WireConnection>().otherConnector.transform.parent.GetInstanceID() == transform.parent.GetInstanceID())
+                            if (item.GetComponent<WireConnection>().otherConnector.transform.parent.GetInstanceID() == transform.parent.GetInstanceID())
                             {
                                 same = true;
                             }
@@ -138,6 +145,7 @@ public class WireConnection : MonoBehaviour
                 }
                 if (global.connector.GetComponent<WireConnection>().transform.parent.GetInstanceID() == transform.parent.GetInstanceID() || same)
                 {
+                    global.connector.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
                     Debug.Log("Select Same");
                     lineRenderer.SetPosition(1, lineRenderer.GetPosition(0));
                     lineRenderer.Simplify(1f);
@@ -161,11 +169,13 @@ public class WireConnection : MonoBehaviour
             else //First Connector
             {
                 global.connector = this.gameObject;
+                global.connector.GetComponent<Renderer>().material.SetColor("_Color", lineRenderer.startColor);
                 lineRenderer.SetPosition(0, transform.position);
                 //Debug.Log("Set Connector!");
                 selected = true;
             }
         }
+
     }
 
     public int getResistance() {return resistance;}
