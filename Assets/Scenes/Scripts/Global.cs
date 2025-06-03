@@ -339,9 +339,11 @@ public class Global : MonoBehaviour
             staticValues.GetComponent<AudioManager>().Play("PowerOff"); 
         }
         consumersOn = on;
-        GameEndCheck(on);
+        //GameEndCheck(on);
     }
 
+    //Finish button appearance, may not be needed 
+    /*
     public void GameEndCheck(int PoweredCons)
     {
         if((PoweredCons >= 1 && finishBtn.activeSelf == false) || (PoweredCons < 1 && finishBtn.activeSelf == true)) //Variable not set to Consumers.Length for testing purposes
@@ -349,6 +351,7 @@ public class Global : MonoBehaviour
             finishBtn.SetActive(!finishBtn.activeSelf);
         }
     }
+    */
 
     public void Play(String sound)
     {

@@ -41,7 +41,13 @@ public class Node
     public int getCost() { return cost; }
 
     public void setSelf(GameObject self) { this.self = self; }
-    public void addPowerPercent(int power) { self.GetComponent<Consumers>().addPowerPercent(power); }
+    public void addPowerPercent(int power)
+    {
+        self.GetComponent<Consumers>().addPowerPercent(power);
+
+        if (power >= 0)
+            self.GetComponent<Consumers>().transform.GetComponent<SquashAndStretch>().PlaySquashAndStretchEffect();
+    }
     public void setPowerOn(bool power) { self.GetComponent<Consumers>().setPowerOn(power); }
     public void setOrigin(GameObject origin) {  this.origin = origin; }
     public void setResistance(int resistance) { this.resistance = resistance; }
