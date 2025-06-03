@@ -137,7 +137,7 @@ public class Generators : MonoBehaviour
             }
             if (item.getCurrentPower() >= 0)
             {
-                item.addPowerPercent(100);
+                item.addPowerPercent(100); 
             }
             else
             {
