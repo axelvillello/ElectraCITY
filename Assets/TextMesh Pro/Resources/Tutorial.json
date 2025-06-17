@@ -1,0 +1,126 @@
+{
+    "dialogue":
+    [
+        {
+            "content": "Welcome to ElectraCITY!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "The goal of the game is to power the city in the cheapest way possible.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Direct power from the power generators to nearby buildings!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "To link generators to buildings you will need to connect wires between them.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "There are three kinds of wires, and each cost $ to connect.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Black wires are the cheapest as they only cost $1.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "They don't stretch out far, and they have high resistance.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Resistance will be explained in a little bit!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Yellow wires are more expensive than black wires, costing $3.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "While they cost more, they have lower resistance than black wires.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Yellow wires are the most expensive with a cost of $10.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "They are very powerful as they can stretch INFINITELY, and have no resistance!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "To explain how resistance works, let's start powering some buildings!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Click on the black wire to select it.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Now click on the circles below the power generator.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Drag the connected wire to a nearby building, and click over a circle to plug it in.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Congratulations! You have powered your first building!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Let's expand the power grid and provide power another building.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Connect a black wire between the powered building, and a nearby unpowered building!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Electricity can travel from one building to the next.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "This way, you can extend the reach of power from the generator!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Continue to connect buildings together with black wires.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Uh-oh! A wire was connected, but the building did not receive power.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "This is because the total resistance of connect wires cannot allow for more electricity to flow further.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "When using wires with resistance, the amount of electricity leaving the building to the next one will be lower.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Let's lower the resistance of the circuit!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Grab the wire connected to the generator, then right-click to delete it.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Now replace the deleted black wire with a red one instead!",
+            "retraceSteps": 0
+        },
+        {
+            "content": "Red wires have lower resistance than black wires.",
+            "retraceSteps": 0
+        },
+        {
+            "content": "This means there is more electricity leaving the powered building than when you used the black wire!",
+            "retraceSteps": 0
+        }
+
+    ]
+}
