@@ -32,6 +32,7 @@ public class Global : MonoBehaviour
     [SerializeField] GameObject ConsumerPrefab;
     [SerializeField] GameObject GeneratorPrefab;
     [SerializeField] GameObject BGObject;
+    [SerializeField] GameObject Tutorial;
     private void Awake()
     {
         if (instance == null)
@@ -92,6 +93,12 @@ public class Global : MonoBehaviour
                 scenario.setCon(20);
                 scenario.setYellow(false);
                 scenario.setRed(false);
+                break;
+            case 100:
+                //Tutorial
+                scenario.setGen(4);
+                scenario.setCon(30);
+                Tutorial.SetActive(true);   //May update to a tutorial class object insteads
                 break;
             default:
                 //Fallen Through

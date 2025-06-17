@@ -34,6 +34,14 @@ public class MenuButtons : MonoBehaviour
         audio.Play("MenuClick");
     }
 
+    public void OnTutorialButton()
+    {
+        staticValues.seed = "A_Nice_Tutorial";
+        staticValues.scenario = 100;
+        audio.Play("MenuClick");
+        SceneManager.LoadScene(1);
+    }
+
     public void OnOptionsButton()
     {
         ScreenToOpen.GetComponentInChildren<Slider>().value = staticValues.volume;
