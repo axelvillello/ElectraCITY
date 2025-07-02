@@ -18,9 +18,11 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private GameObject clickableIndicator;
     private TextMeshProUGUI messageContent;
     private bool isBobbing;
+    private Tutorial tutorialSystem;
 
     void Start()
     {
+        tutorialSystem = GameObject.Find("Tutorial").GetComponent<Tutorial>();
         isBobbing = false;
 
         messageContent = dialogueBox.Find("TutorialMessage").GetComponent<TextMeshProUGUI>();
@@ -33,7 +35,7 @@ public class Dialogue : MonoBehaviour
             dialogueList.AddLast(readLine);
         }
 
-        foreach (DialogueStep n in dialogueList)    //test if LinkedList works
+        foreach (DialogueStep n in dialogueList)    //test if LinkedList was populated
         {
             Debug.Log(n.content);
         }
@@ -54,6 +56,8 @@ public class Dialogue : MonoBehaviour
                     clickableIndicator.SetActive(false);
                     currentNode = currentNode.Next;
                     StartCoroutine(TypeText(currentNode.Value.content));
+
+                    tutorialSystem.dialogueCounter += 1;
                 }
                 else
                 {
