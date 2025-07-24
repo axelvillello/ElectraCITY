@@ -5,7 +5,7 @@ using UnityEngine;
 public class ConnectorGen : MonoBehaviour
 {
     public int ConnectorNumber;
-    private GameObject[] Connectors;
+    public GameObject[] Connectors;
     public GameObject ConnectorPrefab;
 
     public void setConNumber(int conNumber)

@@ -10,7 +10,8 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialCursor;
     private bool isBobbing;
-    private int currentDialogue = 0;
+    public GameObject tutGenerator;
+    public int currentDialogue = 0;
     public int dialogueCounter = 0;
 
     void Start()
@@ -19,11 +20,13 @@ public class Tutorial : MonoBehaviour
 
         tutorialCursor.SetActive(false);
 
+        tutGenerator = FindClosestGenerator(tutorialCursor.transform.position);
+
     }
 
     void Update()
     {
-        if (dialogueCounter > currentDialogue)  //Linearly manipulates objects based on progress through dialogue
+        if (dialogueCounter != currentDialogue)  //Linearly manipulates objects based on progress through dialogue
         {
             switch (dialogueCounter)
             {
@@ -45,13 +48,13 @@ public class Tutorial : MonoBehaviour
                     tutorialCursor.SetActive(true);
                     break;
                 case 14:
-                    tutorialCursor.transform.position = FindClosestGenerator(tutorialCursor.transform.position).transform.position + new UnityEngine.Vector3(0, 200, 0);
+                    tutorialCursor.transform.position = tutGenerator.transform.position + new UnityEngine.Vector3(0, 200, 0);
                     break;
                 case 15:
                     tutorialCursor.SetActive(false);
                     break;
                 case 26:
-                    tutorialCursor.transform.position = FindClosestGenerator(tutorialCursor.transform.position).transform.position + new UnityEngine.Vector3(0, 200, 0);
+                    tutorialCursor.transform.position = tutGenerator.transform.position + new UnityEngine.Vector3(0, 200, 0);
                     tutorialCursor.SetActive(true);
                     break;
                 case 27:
@@ -76,7 +79,7 @@ public class Tutorial : MonoBehaviour
         tutorialCursor.transform.position = target.transform.position + new UnityEngine.Vector3(width, 200, 0);
     }
 
-    GameObject FindClosestGenerator(UnityEngine.Vector3 currentPosition)
+GameObject FindClosestGenerator(UnityEngine.Vector3 currentPosition)
 {
     GameObject[] generators = GameObject.FindGameObjectsWithTag("Generator");
     GameObject closest = null;
@@ -91,6 +94,8 @@ public class Tutorial : MonoBehaviour
             closest = generator;
         }
     }
+
+        closest.GetComponent<Generators>().setTutorialObjectStatus(true);
 
     return closest;
 }

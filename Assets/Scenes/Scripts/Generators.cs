@@ -12,6 +12,7 @@ public class Generators : MonoBehaviour
     [SerializeField] int powerGen;
     int totalConnectionsCost;
     int blackWireTotal, redWireTotal, yellowWireTotal;
+    bool tutorialObjectStatus = false;
 
     private void Start()
     {
@@ -97,7 +98,7 @@ public class Generators : MonoBehaviour
         {
             Debug.Log(tree[i].getSelf() + " from " + tree[i].getOrigin() + " at resistance " + tree[i].getResistance());
             totalConnectionsCost += tree[i].getCost();
-            
+
             switch (tree[i].getResistance())
             {
                 case 3:
@@ -137,7 +138,7 @@ public class Generators : MonoBehaviour
             }
             if (item.getCurrentPower() >= 0)
             {
-                item.addPowerPercent(100); 
+                item.addPowerPercent(100);
             }
             else
             {
@@ -147,7 +148,7 @@ public class Generators : MonoBehaviour
                 }
             }
         }
-    } 
+    }
 
     public int getTotalConnectionsCost()
     {
@@ -156,6 +157,13 @@ public class Generators : MonoBehaviour
 
     public (int black, int red, int yellow) getTotalWires()
     {
-        return(blackWireTotal, redWireTotal, yellowWireTotal);
-    } 
+        return (blackWireTotal, redWireTotal, yellowWireTotal);
+    }
+
+    public bool setTutorialObjectStatus(bool status)
+    {
+        tutorialObjectStatus = status;
+
+        return tutorialObjectStatus;
+    }
 }

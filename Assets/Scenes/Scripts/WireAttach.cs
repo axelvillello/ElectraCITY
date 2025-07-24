@@ -18,7 +18,7 @@ public class WireAttach : MonoBehaviour
     private Global global;
     private int wireOhm;
     private int wireId;
-    private Boolean selected;
+    public Boolean selected;
 
     public Sprite unpressed;
     public Sprite pressed;
