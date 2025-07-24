@@ -937,6 +937,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234194343}
   m_CullTransparentMesh: 1
+--- !u!1 &285984694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8101626038081476520, guid: 0e03182516865484289e2e36b0d86631, type: 3}
+  m_PrefabInstance: {fileID: 5345466134118001097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &339891887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,6 +1701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialCursor: {fileID: 999141550}
+  currentDialogue: 0
   dialogueCounter: 0
 --- !u!4 &985093201
 Transform:
@@ -2020,6 +2026,7 @@ MonoBehaviour:
   jsonfile: {fileID: 4900000, guid: 0ca050593c435bb43b45a65192fb15d5, type: 3}
   dialogueBox: {fileID: 1229824424}
   clickableIndicator: {fileID: 1461747304}
+  blackWire: {fileID: 285984694}
 --- !u!114 &1229824420
 MonoBehaviour:
   m_ObjectHideFlags: 0

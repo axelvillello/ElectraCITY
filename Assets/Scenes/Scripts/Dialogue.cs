@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using System.Numerics;
+using Unity.VisualScripting;
 
 public class Dialogue : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private TextAsset jsonfile;
     [SerializeField] private Transform dialogueBox;
     [SerializeField] private GameObject clickableIndicator;
+    [SerializeField] private GameObject blackWire;
     private TextMeshProUGUI messageContent;
     private bool isBobbing;
     private Tutorial tutorialSystem;
+    private GameObject tutorialBuilding;
 
     void Start()
     {
@@ -47,15 +50,20 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        CheckDialogueBehaviour();
+        
+        if (Input.GetMouseButtonDown(0) || (currentNode.Value.nextStepReady == true))
         {
-            if (currentNode.Value.nextStepReady == true && currentNode.Value.isClickable == true)
+            if (currentNode.Value.isClickable == true)
             {
                 if (currentNode.Next != null)
                 {
                     clickableIndicator.SetActive(false);
                     currentNode = currentNode.Next;
+                    StopAllCoroutines();
                     StartCoroutine(TypeText(currentNode.Value.content));
+
+                    isBobbing = false;
 
                     tutorialSystem.dialogueCounter += 1;
                 }
@@ -67,9 +75,119 @@ public class Dialogue : MonoBehaviour
         }
 
         if (clickableIndicator.activeSelf == true && !isBobbing)
+            {
+                StartCoroutine(IconBounceDelay());
+            }
+    }
+
+    private void CheckDialogueBehaviour()
+    {   
+        switch (tutorialSystem.dialogueCounter)
         {
-            StartCoroutine(IconBounceDelay());
+            case 13:
+                if (blackWire.GetComponent<WireAttach>().selected == false)
+                {
+                    currentNode.Value.isClickable = false;
+                }
+                else
+                {
+                    currentNode.Value.nextStepReady = true;
+                    currentNode.Value.isClickable = true;
+                }
+
+                break;
+
+            case 14:
+                bool genSelected = false;
+
+                for (int i = 0; i < tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors.Length; i++)
+                {
+                    if (tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().selected == true)
+                    {
+                        genSelected = true;
+                    }
+                }
+
+                if (genSelected == false)
+                {
+                    currentNode.Value.isClickable = false;
+                }
+                else
+                {
+                    currentNode.Value.nextStepReady = true;
+                    currentNode.Value.isClickable = true;
+                }
+
+                break;
+
+            case 15:
+                bool genConnected = false;
+
+                for (int i = 0; i < tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors.Length; i++)
+                {
+                    if (tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector)
+                    {
+                        genConnected = true;
+                        tutorialBuilding = tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector.GetComponent<WireConnection>().getParent();
+                    }
+                }
+
+                if (genConnected == false)
+                {
+                    currentNode.Value.isClickable = false;
+                }
+                else
+                {
+                    currentNode.Value.nextStepReady = true;
+                    currentNode.Value.isClickable = true;
+                }
+
+                break;
+
+            case 18:
+                bool buildingConnected = false;
+
+                for (int i = 0; i < tutorialBuilding.GetComponentInParent<ConnectorGen>().Connectors.Length; i++)
+                {
+                    if (tutorialBuilding.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector)
+                    {
+                        Transform[] parents = tutorialBuilding.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector.GetComponent<WireConnection>().getParent().GetComponentsInParent<Transform>();
+
+                        foreach (Transform p in parents)
+                        {
+                            if (p.CompareTag("Consumer"))
+                                buildingConnected = true;
+                        }
+                    }
+                }
+                
+                if (buildingConnected == false)
+                {
+                    currentNode.Value.isClickable = false;
+                }
+                else
+                {
+                    currentNode.Value.nextStepReady = true;
+                    currentNode.Value.isClickable = true;
+                }
+
+                break; 
+
+            default:
+                currentNode.Value.isClickable = true;
+                break;
+            }
+        
+    }
+    public void DialogueRetrace(int reSteps)
+    {
+        for (int i = 0; i < reSteps; i++)
+        {
+            currentNode = currentNode.Previous;
+            tutorialSystem.dialogueCounter -= 1;
         }
+
+        StartCoroutine(TypeText(currentNode.Value.content));
     }
 
     private IEnumerator TypeText(string line)   //Typewriter effect for dialogue messages
@@ -82,8 +200,8 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
 
-        currentNode.Value.nextStepReady = true;
-        clickableIndicator.SetActive(true);
+        if (currentNode.Value.isClickable == true)
+            clickableIndicator.SetActive(true);
 
     }
 
@@ -104,10 +222,11 @@ public class Dialogue : MonoBehaviour
 [Serializable]
 public class DialogueStep
 {
+    public int id;
     public string content;
     public int retraceSteps = 0;     //If > 0, revert that many steps in the dialogue list
-    public bool nextStepReady = false;     //Flag for when to point traverse to the next dialogue step
-    public bool isClickable = true;       //Flags when a user can click to traverse dialogue (may not be needed)
+    public bool nextStepReady = false;     //Flags when to automatically traverse to dialogue
+    public bool isClickable = false;      //Flags when a user can click to traverse dialogue 
 
 }
 

@@ -7,13 +7,13 @@ using UnityEngine;
 public class WireConnection : MonoBehaviour
 {
     private Global global;
-    private Boolean selected;
     private int resistance;
     private int wireType;
     private GameObject parent;
     private int maxDelta = 1000;
     private System.Random random = new System.Random();
 
+    public Boolean selected;
     public LineRenderer lineRenderer;
     public GameObject otherConnector;
 
