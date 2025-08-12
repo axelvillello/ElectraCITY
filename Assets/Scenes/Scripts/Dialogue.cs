@@ -22,9 +22,11 @@ public class Dialogue : MonoBehaviour
     private bool isBobbing;
     private Tutorial tutorialSystem;
     private GameObject tutorialBuilding;
+    private List<GameObject> tutorialConnections = new List<GameObject>();
 
     void Start()
     {
+
         tutorialSystem = GameObject.Find("Tutorial").GetComponent<Tutorial>();
         isBobbing = false;
 
@@ -129,6 +131,7 @@ public class Dialogue : MonoBehaviour
                     {
                         genConnected = true;
                         tutorialBuilding = tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector.GetComponent<WireConnection>().getParent();
+                        tutorialConnections.Add(tutorialBuilding);
                     }
                 }
 
@@ -156,8 +159,13 @@ public class Dialogue : MonoBehaviour
                         foreach (Transform p in parents)
                         {
                             if (p.CompareTag("Consumer"))
+                            {
                                 buildingConnected = true;
+                            }
                         }
+
+                        tutorialConnections.Add(tutorialBuilding.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector.GetComponent<WireConnection>().getParent());
+
                     }
                 }
                 
@@ -172,6 +180,54 @@ public class Dialogue : MonoBehaviour
                 }
 
                 break; 
+
+            case 21:
+                bool unpoweredBuilding = false;
+
+                PopulateTutorialConsumers(tutorialBuilding);
+
+                if (tutorialConnections.Count == 0)
+                    { Debug.Log("tutorialConnections empty!"); }
+
+                foreach (GameObject c in tutorialConnections)
+                {
+                    var connGen = c.GetComponentInParent<ConnectorGen>();
+
+                    if (connGen == null || connGen.Connectors == null)
+                        continue;
+
+                    foreach (var connector in connGen.Connectors)
+                    {
+                        var wireConnection = connector?.GetComponent<WireConnection>();
+                        if (wireConnection == null || wireConnection.otherConnector == null) continue;
+
+                        var otherCon = wireConnection?.otherConnector;
+                        var otherWire = otherCon?.GetComponent<WireConnection>();
+                        var parent = otherWire?.getParent();
+                        var consumer = parent?.GetComponent<Consumers>();
+
+                        if (consumer != null && consumer.isPowerOn() == false)
+                        {
+                            unpoweredBuilding = true;
+                            Debug.Log("Building unpowered!");
+
+                        }
+
+                    }
+                
+                }
+
+                if (unpoweredBuilding == false)
+                {
+                    currentNode.Value.isClickable = false;
+                }
+                else
+                {
+                    currentNode.Value.nextStepReady = true;
+                    currentNode.Value.isClickable = true;
+                }
+                
+                break;
 
             default:
                 currentNode.Value.isClickable = true;
@@ -188,6 +244,31 @@ public class Dialogue : MonoBehaviour
         }
 
         StartCoroutine(TypeText(currentNode.Value.content));
+    }
+
+    private void PopulateTutorialConsumers(GameObject building)
+    {
+        GameObject currentBuilding;
+
+        for (int i = 0; i < building.GetComponentInParent<ConnectorGen>().Connectors.Length; i++)
+        {
+            if (building.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>() && building.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector)
+            {
+                if (building.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector.GetComponent<WireConnection>().getParent() != null)
+                {
+                    currentBuilding = building.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector.GetComponent<WireConnection>().getParent();
+
+                    if (!tutorialConnections.Contains(currentBuilding))
+                    {
+                        tutorialConnections.Add(currentBuilding);
+                        PopulateTutorialConsumers(currentBuilding);
+                    }
+                }
+
+            }
+        }
+
+        return;
     }
 
     private IEnumerator TypeText(string line)   //Typewriter effect for dialogue messages

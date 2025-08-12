@@ -1701,6 +1701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialCursor: {fileID: 999141550}
+  tutGenerator: {fileID: 0}
   currentDialogue: 0
   dialogueCounter: 0
 --- !u!4 &985093201
@@ -4163,16 +4164,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 852268174}
     - target: {fileID: 5761283201038718987, guid: 0e03182516865484289e2e36b0d86631, type: 3}
+      propertyPath: m_Color.a
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761283201038718987, guid: 0e03182516865484289e2e36b0d86631, type: 3}
       propertyPath: m_Color.b
-      value: 0.45225722
+      value: 0.46666667
       objectReference: {fileID: 0}
     - target: {fileID: 5761283201038718987, guid: 0e03182516865484289e2e36b0d86631, type: 3}
       propertyPath: m_Color.g
-      value: 0.9528302
+      value: 0.88235295
       objectReference: {fileID: 0}
     - target: {fileID: 5761283201038718987, guid: 0e03182516865484289e2e36b0d86631, type: 3}
       propertyPath: m_Color.r
-      value: 0.3460751
+      value: 0.22745098
       objectReference: {fileID: 0}
     - target: {fileID: 7443597826122408611, guid: 0e03182516865484289e2e36b0d86631, type: 3}
       propertyPath: m_Name
@@ -4189,6 +4194,10 @@ PrefabInstance:
     - target: {fileID: 8716943128074032195, guid: 0e03182516865484289e2e36b0d86631, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750454412356621577, guid: 0e03182516865484289e2e36b0d86631, type: 3}
+      propertyPath: m_TagString
+      value: Background
       objectReference: {fileID: 0}
     - target: {fileID: 9015795198946690598, guid: 0e03182516865484289e2e36b0d86631, type: 3}
       propertyPath: m_AnchoredPosition.x
