@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WireConnection : MonoBehaviour
 {
@@ -16,14 +17,23 @@ public class WireConnection : MonoBehaviour
     public Boolean selected;
     public LineRenderer lineRenderer;
     public GameObject otherConnector;
+    public Image uiImage;
+    public int length = 1;
+    private Color originalBGColor;
+
+
 
 
     private void Awake()
     {
         global = GameObject.FindGameObjectWithTag("Global").GetComponent<Global>();
+        uiImage = GameObject.FindGameObjectWithTag("Background").GetComponent<Image>();
+        originalBGColor = new Color(uiImage.color.r, uiImage.color.g, uiImage.color.b);
+
         lineRenderer.startWidth = 0.15f;
         lineRenderer.endWidth = 0.15f;
-        lineRenderer.sortingOrder = 3;
+        //lineRenderer.sortingLayerID = 0;
+        //lineRenderer.sortingOrder = 3;
         parent = this.transform.parent.gameObject;
     }
     void Update()
@@ -35,6 +45,12 @@ public class WireConnection : MonoBehaviour
             Vector3 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             lineRenderer.SetPosition(1, Vector3.MoveTowards(startPos, endPos, maxDelta));
 
+            if (uiImage != null && uiImage.color != new Color(originalBGColor.r, originalBGColor.g, originalBGColor.b, 0.4f))
+            {
+                Color currentColor = uiImage.color;
+                uiImage.color = new Color(currentColor.r, currentColor.g, currentColor.b, 0.4f);
+            } 
+
             if (global.connector == null)
             {
                 global.wireSelected = false;
@@ -43,16 +59,18 @@ public class WireConnection : MonoBehaviour
                 lineRenderer.Simplify(1f);
             }
         }
-        else
+        /*else 
         {
-
-        }
+            uiImage.color = originalBGColor;
+        }*/
 
         if (otherConnector)
         {
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, otherConnector.transform.position);
             otherConnector.GetComponent<Renderer>().material.SetColor("_Color", lineRenderer.startColor);
+            uiImage.color = originalBGColor;
+            
 
         }
         
@@ -63,12 +81,15 @@ public class WireConnection : MonoBehaviour
         if (global.wireID != 0)
         {
             global.Play("Click" + random.Next(1, 4).ToString());
+
+            
         }
         //If object has other connector it is wired
         //If global connector is not null, wire is being dragged
         if (!otherConnector)
         {
             wireType = global.wireID;
+            
         }
         switch (wireType) //Choose color based on wire selected
         {
@@ -77,15 +98,15 @@ public class WireConnection : MonoBehaviour
                 break;
             case 1:
                 //Debug.Log("Black");
-                lineRenderer.startColor = Color.black;
-                lineRenderer.endColor = Color.black;
-                maxDelta = 1000;
+                lineRenderer.startColor = new Color(58f/255f, 129f/255f, 255f/255f);
+                lineRenderer.endColor = new Color(58f/255f, 129f/255f, 255f/255f);
+                maxDelta = 10000;
                 break;
             case 2:
                 //Debug.Log("Red");
                 lineRenderer.startColor = Color.red;
                 lineRenderer.endColor = Color.red;
-                maxDelta = 1000;
+                maxDelta = 10000;
                 break;
             case 3:
                 //Debug.Log("Yellow");
@@ -113,6 +134,10 @@ public class WireConnection : MonoBehaviour
             otherConnector = null;
             //Wire Type change
             global.wireID = wireType;
+            
+            //length = (int)(global.connector.transform.position - transform.position).magnitude;
+
+       
         }
         else if (otherConnector && global.connector != null)
         {
@@ -153,6 +178,7 @@ public class WireConnection : MonoBehaviour
                     resistance = global.wireOhm;
                     //global.wireID = 0; //Unselect
                     global.RedistributePower();
+
                 }
                 else
                 {
@@ -164,6 +190,9 @@ public class WireConnection : MonoBehaviour
                     //Debug.Log("Connection Made");
                     global.RedistributePower();
                     selected = false;
+
+                    //length = (int)(global.connector.transform.position - transform.position).magnitude;
+
                 }
             }
             else //First Connector
@@ -173,6 +202,7 @@ public class WireConnection : MonoBehaviour
                 lineRenderer.SetPosition(0, transform.position);
                 //Debug.Log("Set Connector!");
                 selected = true;
+
             }
         }
 

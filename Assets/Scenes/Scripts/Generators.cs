@@ -30,7 +30,7 @@ public class Generators : MonoBehaviour
             WireConnection wc = child.gameObject.GetComponent<WireConnection>();
             if (wc.otherConnector != null)
             {
-                connectionTree.Add(new Node(wc.otherConnector.GetComponent<WireConnection>().getParent(), gameObject, child.GetComponent<WireConnection>().getResistance()));
+                connectionTree.Add(new Node(wc.otherConnector.GetComponent<WireConnection>().getParent(), gameObject, child.GetComponent<WireConnection>().getResistance(), 1));
                 queue.Enqueue(wc.otherConnector.GetComponent<WireConnection>().getParent());
                 wc.otherConnector.GetComponent<WireConnection>().getParent().GetComponent<Consumers>().setInGen(true);
             }
@@ -66,8 +66,8 @@ public class Generators : MonoBehaviour
                         {
                             connections++;
                             //Debug.Log(otherConnection.getParent() + " from " + currentObject + " at resistance " + otherConnection.getResistance());
-                            toSort[i] = new Node(otherConnection.getParent(), currentObject, otherConnection.getResistance());
-                            tree.Add(new Node(otherConnection.getParent(), currentObject, otherConnection.getResistance()));
+                            toSort[i] = new Node(otherConnection.getParent(), currentObject, otherConnection.getResistance(), 1);
+                            tree.Add(new Node(otherConnection.getParent(), currentObject, otherConnection.getResistance(), 1));
                             queue.Enqueue(otherConnection.getParent());
                             otherConnection.getParent().GetComponent<Consumers>().setInGen(true);
                         }

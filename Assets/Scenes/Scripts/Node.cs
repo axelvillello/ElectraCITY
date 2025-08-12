@@ -10,21 +10,22 @@ public class Node
     private int currentPower;
     private int cost;
     
-    public Node(GameObject self, GameObject origin, int resistance)
+    public Node(GameObject self, GameObject origin, int resistance, int wireCost)
     {
         setSelf(self);
         setOrigin(origin);
         setResistance(resistance);
+
         switch (resistance)
         {
             case 0:
-                setCost(10); //Yellow Wire
+                setCost(3*wireCost); //Yellow Wire
                 break;
             case 1:
-                setCost(3); //Red Wire
+                setCost(2*wireCost); //Red Wire
                 break;
             case 3:
-                setCost(1); //Black Wire
+                setCost(1*wireCost); //Black Wire
                 break;
             default:
                 setCost(999); //Disallowed Resistance Used
