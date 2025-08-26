@@ -22,6 +22,8 @@ public class Global : MonoBehaviour
 
     public GameObject connector;
     public GameObject finishBtn;
+    public Image uiImage;
+    private Color originalBGColor;
     public int wireOhm;
     public int wireID = 0; 
     //0: None Selected
@@ -38,6 +40,8 @@ public class Global : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            uiImage = GameObject.FindGameObjectWithTag("Background").GetComponent<Image>();
+            originalBGColor = new Color(uiImage.color.r, uiImage.color.g, uiImage.color.b);
             //DontDestroyOnLoad(instance);
         }
         else
@@ -110,12 +114,29 @@ public class Global : MonoBehaviour
 
     private void Update()
     {
+
+        if (connector)
+        {
+            uiImage.color = new Color(originalBGColor.r, originalBGColor.g, originalBGColor.b, 0.4f);
+            Debug.Log("BG color dimmed!");
+        }
+        else
+        {
+            uiImage.color = new Color(originalBGColor.r, originalBGColor.g, originalBGColor.b);
+            Debug.Log("BG color reverted!");
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             //Debug.Log(Input.mousePosition);
         }
         if (Input.GetMouseButtonDown(1)) //Right Click
         {
+            if (connector)
+            {
+                connector.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                Debug.Log("Connector changed to white!");
+            }
             RedistributePower();
         }
 
@@ -380,7 +401,15 @@ public class Global : MonoBehaviour
             Consumers conSc = con.GetComponent<Consumers>();
             if (conSc.isPowerOn())
             {
-                totalScore[0] += conSc.getScore();
+                GameObject[] scConnectors = conSc.transform.GetComponent<ConnectorGen>().Connectors;
+                foreach (GameObject scCon in scConnectors)
+                {
+                    int scConLen = scCon.GetComponent<WireConnection>().length;
+                    if (scCon.GetComponent<WireConnection>() != null || scConLen != 0)
+                    {
+                        totalScore[0] += conSc.getScore() * scConLen;
+                    }
+                }         
             }
         }
         foreach (GameObject gen in Generators)
