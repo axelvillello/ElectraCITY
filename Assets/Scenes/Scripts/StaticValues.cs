@@ -9,6 +9,7 @@ public class StaticValues : MonoBehaviour
     public float volume = 50.0f;
     public string seed;
     public int scenario = 0;
+    public float textSpd;
 
     private void Awake()
     {
@@ -34,7 +35,12 @@ public class StaticValues : MonoBehaviour
         AudioSource[] sources = this.GetComponents<AudioSource>();
         foreach (AudioSource source in sources)
         {
-            source.volume = volume/100;
+            source.volume = volume / 100;
         }
+    }
+
+    public void SetTxtSpd(float spd)
+    {
+        textSpd = spd;
     }
 }
