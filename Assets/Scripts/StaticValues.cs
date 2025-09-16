@@ -9,7 +9,8 @@ public class StaticValues : MonoBehaviour
     public float volume = 50.0f;
     public string seed;
     public int scenario = 0;
-    public float textSpd;
+    public float textSpd = 5;
+    public int colorFilter = 0;
 
     private void Awake()
     {
