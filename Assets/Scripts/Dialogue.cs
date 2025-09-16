@@ -21,13 +21,14 @@ public class Dialogue : MonoBehaviour
     private TextMeshProUGUI messageContent;
     private bool isBobbing;
     private Tutorial tutorialSystem;
+    private StaticValues staticValues;
     private GameObject tutorialBuilding;
     private List<GameObject> tutorialConnections = new List<GameObject>();
 
     void Start()
     {
-
         tutorialSystem = GameObject.Find("Tutorial").GetComponent<Tutorial>();
+        staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
         isBobbing = false;
 
         messageContent = dialogueBox.Find("TutorialMessage").GetComponent<TextMeshProUGUI>();
@@ -273,7 +274,7 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator TypeText(string line)   //Typewriter effect for dialogue messages
     {
-        float delay = 0.03f;
+        float delay = 0.1f/staticValues.textSpd;
         messageContent.text = "";
         foreach (char letter in line.ToCharArray())
         {

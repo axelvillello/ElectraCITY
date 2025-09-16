@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Wilberforce;
 
 public class Global : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Global : MonoBehaviour
     public GameObject finishBtn;
     public Image uiImage;
     private Color originalBGColor;
+    public Camera mainCamera;
     public int wireOhm;
     public int wireID = 0; 
     //0: None Selected
@@ -53,18 +55,18 @@ public class Global : MonoBehaviour
     private void Start()
     {
         staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
-        if(staticValues.seed == null)
+        if (staticValues.seed == null)
         {
             staticValues.seed = Random.Range(0, 1000000).ToString();
         }
         seed = Math.Abs(staticValues.seed.GetHashCode());
         Debug.Log(seed);
-        
+
         Random.InitState(seed); //Seed
         Scenario ChosenScenario = ScenarioList(staticValues.scenario);
         camera = GameObject.FindGameObjectWithTag("UI").GetComponent<Canvas>().worldCamera;
         wires = GameObject.FindGameObjectsWithTag("Wire");
-        
+
         totalScore = new int[2];
 
         Generate(ChosenScenario);
@@ -72,6 +74,8 @@ public class Global : MonoBehaviour
         Consumers = GameObject.FindGameObjectsWithTag("Consumer");
         Generators = GameObject.FindGameObjectsWithTag("Generator");
         Connectors = GameObject.FindGameObjectsWithTag("Connector");
+        
+        mainCamera.GetComponent<Colorblind>().Type = staticValues.colorFilter;
 
     }
 
