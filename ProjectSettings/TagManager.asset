@@ -12,6 +12,7 @@ TagManager:
   - StaticValues
   - Wire
   - Background
+  - Text
   layers:
   - Default
   - TransparentFX
