@@ -9,23 +9,25 @@ public class Node
     private int resistance;
     private int currentPower;
     private int cost;
+    private float distance;
     
     public Node(GameObject self, GameObject origin, int resistance)
     {
         setSelf(self);
         setOrigin(origin);
         setResistance(resistance);
+        setDistance(Vector3.Distance(self.transform.position, origin.transform.position));
 
         switch (resistance)
         {
             case 0:
-                setCost(3); //Yellow Wire
+                setCost(9); //Yellow Wire
                 break;
             case 1:
-                setCost(2); //Red Wire
+                setCost(6); //Red Wire
                 break;
             case 3:
-                setCost(1); //Black Wire
+                setCost(3); //Black Wire
                 break;
             default:
                 setCost(999); //Disallowed Resistance Used
@@ -39,6 +41,7 @@ public class Node
     public GameObject getOrigin() { return origin; }
     public int getResistance() {  return resistance; }
     public int getCurrentPower() { return currentPower;}
+    public int getDistance() { return (int)distance; }
     public int getCost() { return cost; }
 
     public void setSelf(GameObject self) { this.self = self; }
@@ -53,6 +56,7 @@ public class Node
     public void setOrigin(GameObject origin) {  this.origin = origin; }
     public void setResistance(int resistance) { this.resistance = resistance; }
     public void setCurrentPower(int power) { this.currentPower = power; }
-    public void setCost(int cost) {  this.cost = cost; }
+    public void setDistance(float distance) { this.distance = distance; }
+    public void setCost(int cost) { this.cost = cost; }
 
 }

@@ -198,6 +198,7 @@ public class WireConnection : MonoBehaviour
     }
 
     public int getResistance() {return resistance;}
+    public int getWireType() {return wireType;}
 
     public GameObject getParent() { return parent; }
 }

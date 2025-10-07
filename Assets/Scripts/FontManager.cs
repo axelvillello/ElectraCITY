@@ -61,7 +61,7 @@ public class FontManager : MonoBehaviour
         }
     }
 
-    public void FindAssetWithTag(Transform parent)
+    public void FindAssetWithTag(Transform parent)  //Recursive function used using Transforms instead of GameObject
     {
         if (parent.gameObject.CompareTag("Text"))
         {

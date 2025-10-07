@@ -27,7 +27,7 @@ public class Global : MonoBehaviour
     private Color originalBGColor;
     public Camera mainCamera;
     public int wireOhm;
-    public int wireID = 0; 
+    public int wireID = 0;
     //0: None Selected
     //1: Black Wire
     //2: Red Wire
@@ -74,7 +74,7 @@ public class Global : MonoBehaviour
         Consumers = GameObject.FindGameObjectsWithTag("Consumer");
         Generators = GameObject.FindGameObjectsWithTag("Generator");
         Connectors = GameObject.FindGameObjectsWithTag("Connector");
-        
+
         mainCamera.GetComponent<Colorblind>().Type = staticValues.colorFilter;
 
     }
@@ -92,13 +92,13 @@ public class Global : MonoBehaviour
             case 1:
                 //Scenario 1 (No Super, Only 2 Gens)
                 scenario.setGen(2);
-                scenario.setCon(20);
+                scenario.setCon(30);
                 scenario.setYellow(false);
                 break;
             case 2:
                 //Scenario 2
                 scenario.setGen(4);
-                scenario.setCon(20);
+                scenario.setCon(30);
                 scenario.setYellow(false);
                 scenario.setRed(false);
                 break;
@@ -122,12 +122,10 @@ public class Global : MonoBehaviour
         if (connector)
         {
             uiImage.color = new Color(originalBGColor.r, originalBGColor.g, originalBGColor.b, 0.4f);
-            Debug.Log("BG color dimmed!");
         }
         else
         {
             uiImage.color = new Color(originalBGColor.r, originalBGColor.g, originalBGColor.b);
-            Debug.Log("BG color reverted!");
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -144,24 +142,24 @@ public class Global : MonoBehaviour
             RedistributePower();
         }
 
-        
+
     }
 
     public void RedistributePower()
     {
-            connector = null;
-            PowerReset();
-            for (int i = 0; i < GetGeneratorsLength(); i++)
-            {
-                GetGeneratorsIndex(i).GetComponent<Generators>().Plant();
-                ConsumerClear();
-            }
-            ConsumerChange();
+        connector = null;
+        PowerReset();
+        for (int i = 0; i < GetGeneratorsLength(); i++)
+        {
+            GetGeneratorsIndex(i).GetComponent<Generators>().Plant();
+            ConsumerClear();
+        }
+        ConsumerChange();
     }
 
     public void ConsumerClear()
     {
-        for(int i = 0; i < Consumers.Length; i++)
+        for (int i = 0; i < Consumers.Length; i++)
         {
             Consumers[i].GetComponent<Consumers>().setInGen(false);
         }
@@ -178,16 +176,16 @@ public class Global : MonoBehaviour
     public void Generate(Scenario scenario)
     {
 
-        GridObject[,] grid = new GridObject[36,20];
+        GridObject[,] grid = new GridObject[36, 20];
         grid = GridManager(grid);
 
         foreach (GridObject gridSpace in grid)
         {
 
-            if (Random.Range(0,100) < 15 && gridSpace.getY() > 100)
+            if (Random.Range(0, 100) < 15 && gridSpace.getY() > 100)
             {
                 GameObject obj = Instantiate(BGObject, camera.ScreenToWorldPoint(new Vector3(gridSpace.getX(), gridSpace.getY(), 120)), Quaternion.identity, this.transform);
-                obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteLibrary>().GetSprite("BGObjects", Random.Range(1,4).ToString());
+                obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteLibrary>().GetSprite("BGObjects", Random.Range(1, 4).ToString());
             }
         }
 
@@ -198,7 +196,7 @@ public class Global : MonoBehaviour
             if (wires[i].name == "B-Wire" && !scenario.getBlack()) { wires[i].SetActive(false); }
         }
 
-        for(int gens = 0; gens < scenario.getGen(); gens++)
+        for (int gens = 0; gens < scenario.getGen(); gens++)
         {
             bool notValid = true;
             int x = 0;
@@ -207,13 +205,13 @@ public class Global : MonoBehaviour
             {
                 x = Random.Range(1, 35);
                 y = Random.Range(3, 19);
-                if(CheckSpacing(grid, x, y))
+                if (CheckSpacing(grid, x, y))
                 {
                     notValid = false;
                 }
             }
             Debug.Log("x: " + x + " Y: " + y);
-            grid[x,y].setResource(Instantiate(GeneratorPrefab, camera.ScreenToWorldPoint(new Vector3(grid[x,y].getX(), grid[x,y].getY(), 110)), Quaternion.identity, this.transform));
+            grid[x, y].setResource(Instantiate(GeneratorPrefab, camera.ScreenToWorldPoint(new Vector3(grid[x, y].getX(), grid[x, y].getY(), 110)), Quaternion.identity, this.transform));
             NearbyOccupied(grid, x, y);
             //Connector Number
             int rand = Random.Range(0, 100);
@@ -221,11 +219,11 @@ public class Global : MonoBehaviour
             {
                 grid[x, y].getResource().GetComponent<ConnectorGen>().setConNumber(1);
             }
-            else if(rand <= 55)
+            else if (rand <= 55)
             {
                 grid[x, y].getResource().GetComponent<ConnectorGen>().setConNumber(2);
             }
-            else if(rand <= 95)
+            else if (rand <= 95)
             {
                 grid[x, y].getResource().GetComponent<ConnectorGen>().setConNumber(3);
             }
@@ -284,9 +282,9 @@ public class Global : MonoBehaviour
             }
             if (20 < x && x < 30) //Center Demerit
             {
-                score *= 0.8; 
+                score *= 0.8;
             }
-            if(10 <y && y < 14)
+            if (10 < y && y < 14)
             {
                 score *= 0.8;
             }
@@ -313,7 +311,7 @@ public class Global : MonoBehaviour
 
     public bool CheckSpacing(GridObject[,] grid, int x, int y)
     {
-        if (grid[x, y].isOccupied() || grid[x+1, y].isOccupied() || grid[x-1, y].isOccupied() || grid[x, y-1].isOccupied() || grid[x+1, y-1].isOccupied() || grid[x-1, y-1].isOccupied())
+        if (grid[x, y].isOccupied() || grid[x + 1, y].isOccupied() || grid[x - 1, y].isOccupied() || grid[x, y - 1].isOccupied() || grid[x + 1, y - 1].isOccupied() || grid[x - 1, y - 1].isOccupied())
         {
             Debug.Log("Occupied at x:" + x + " y:" + y);
             return false;
@@ -336,17 +334,17 @@ public class Global : MonoBehaviour
 
     public GridObject[,] GridManager(GridObject[,] grid)
     {
-        float width = camera.pixelWidth/grid.GetLength(0);
-        float height = camera.pixelHeight/grid.GetLength(1);
+        float width = camera.pixelWidth / grid.GetLength(0);
+        float height = camera.pixelHeight / grid.GetLength(1);
         int[] coords = new int[2];
 
         for (int x = 0; x < grid.GetLength(0); x++)
         {
-            for(int y = 0; y < grid.GetLength(1); y++)
+            for (int y = 0; y < grid.GetLength(1); y++)
             {
-                coords[0]=x;
-                coords[1]=y;
-                grid[x, y] = new GridObject(x*width+width/2, y*height+height/2, width, height, coords);
+                coords[0] = x;
+                coords[1] = y;
+                grid[x, y] = new GridObject(x * width + width / 2, y * height + height / 2, width, height, coords);
             }
         }
         return grid;
@@ -355,7 +353,7 @@ public class Global : MonoBehaviour
     public void ConsumerChange()
     {
         int on = 0;
-        for(int i = 0; i<Consumers.Length-1; i++)
+        for (int i = 0; i < Consumers.Length - 1; i++)
         {
             if (Consumers[i].GetComponent<Consumers>().isPowerOn())
             {
@@ -368,7 +366,7 @@ public class Global : MonoBehaviour
         }
         else if (consumersOn > on)
         {
-            staticValues.GetComponent<AudioManager>().Play("PowerOff"); 
+            staticValues.GetComponent<AudioManager>().Play("PowerOff");
         }
         consumersOn = on;
         //GameEndCheck(on);
@@ -389,14 +387,7 @@ public class Global : MonoBehaviour
     {
         staticValues.GetComponent<AudioManager>().Play(sound);
     }
-    public GameObject[] GetConsumers() {return Consumers;}
-    public GameObject[] GetGenerators() {return Generators;}
-    public int GetConsumersLength() { return Consumers.Length;}
-    public int GetGeneratorsLength() { return Generators.Length; }
-    public GameObject GetConsumersIndex(int i) { return Consumers[i]; }
-    public GameObject GetGeneratorsIndex(int i) { return Generators[i]; }
-
-    public int[] getTotalScore() 
+    public int[] getTotalScore()
     {
         totalScore[0] = 0;
         totalScore[1] = 0;
@@ -405,28 +396,22 @@ public class Global : MonoBehaviour
             Consumers conSc = con.GetComponent<Consumers>();
             if (conSc.isPowerOn())
             {
-                GameObject[] scConnectors = conSc.transform.GetComponent<ConnectorGen>().Connectors;
-                foreach (GameObject scCon in scConnectors)
-                {
-                    int scConLen = scCon.GetComponent<WireConnection>().length;
-                    if (scCon.GetComponent<WireConnection>() != null || scConLen != 0)
-                    {
-                        totalScore[0] += conSc.getScore() * scConLen;
-                    }
-                }         
+                totalScore[0] += conSc.getScore();
             }
         }
+
         foreach (GameObject gen in Generators)
         {
             Generators genSc = gen.GetComponent<Generators>();
             totalScore[1] += genSc.getTotalConnectionsCost();
         }
         return totalScore;
+
     }
 
-    public (int black, int red, int yellow) getWireScores()     
+    public (int black, int red, int yellow) getWireScores()
     {
-        int black = 0 , red = 0, yellow = 0;
+        int black = 0, red = 0, yellow = 0;
         foreach (GameObject gen in Generators)
         {
             Generators genSc = gen.GetComponent<Generators>();
@@ -437,6 +422,13 @@ public class Global : MonoBehaviour
         }
         return (black, red, yellow);
     }
-    public int getTotalPoweredCons(){return consumersOn;}
-    public int getTotalConsumers(){return Consumers.Length;}
+    public int getTotalPoweredCons() { return consumersOn; }
+    public int getTotalConsumers() { return Consumers.Length; }
+    public GameObject[] GetConsumers() {return Consumers;}
+    public GameObject[] GetGenerators() {return Generators;}
+    public int GetConsumersLength() { return Consumers.Length;}
+    public int GetGeneratorsLength() { return Generators.Length; }
+    public GameObject GetConsumersIndex(int i) { return Consumers[i]; }
+    public GameObject GetGeneratorsIndex(int i) { return Generators[i]; }
+
 }   
