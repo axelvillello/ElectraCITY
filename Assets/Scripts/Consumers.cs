@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,7 @@ public class Consumers : MonoBehaviour
     private bool PowerOn;
     private int PowerPercent;
     private bool inGen;
+    private int genSpriteID;
     private Global global;
     private System.Random random;
 
@@ -34,7 +36,8 @@ public class Consumers : MonoBehaviour
         global = GameObject.FindGameObjectWithTag("Global").GetComponent<Global>();
         tmp.text = pointValue.ToString();
         transform.GetComponent<ConnectorGen>().GenerateConnectors();
-        this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites[random.Next(sprites.Length-1)];
+        genSpriteID = checkSprite(pointValue);
+        this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites[genSpriteID];
     }
 
     public void reDraw()
@@ -49,10 +52,51 @@ public class Consumers : MonoBehaviour
         }
     }
 
-    public void setPoint(int pointValue) 
-    { 
+    public void setPoint(int pointValue)
+    {
         this.pointValue = pointValue;
         tmp.text = pointValue.ToString();
+    }
+    private int checkSprite(int comparedPoints)
+    {
+        int spriteID = 0;
+        List<int> numbers = null;  //Holds ID of sprites that represent the same point value
+        switch (comparedPoints)
+        {
+            case 3:
+                spriteID = 11;
+                break;
+            case 4:
+                numbers = new List<int> { 4, 6, 7 };
+                spriteID = random.Next(numbers.Count);
+                break;
+            case 5:
+                numbers = new List<int> { 1, 2, 12 };
+                spriteID = random.Next(numbers.Count);
+                break;
+            case 6:
+                spriteID = 10;
+                break;
+            case 7:
+                numbers = new List<int> { 0, 3 };
+                spriteID = random.Next(numbers.Count);;
+                break;
+            case 8:
+                numbers = new List<int> { 5, 8 };
+                spriteID = random.Next(numbers.Count);
+                break;
+            case 9:
+                spriteID = 9;
+                break;
+            default:
+                Debug.Log("Invalid point value for consumer object!");
+                break;
+        }
+        if (numbers != null)
+        { 
+            numbers.Clear();
+        }
+        return spriteID;
     }
     public int getPoint() { return pointValue; }
 

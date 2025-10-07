@@ -97,7 +97,17 @@ public class Generators : MonoBehaviour
         for (int i = 0; i < tree.Count; i++)
         {
             Debug.Log(tree[i].getSelf() + " from " + tree[i].getOrigin() + " at resistance " + tree[i].getResistance());
-            totalConnectionsCost += tree[i].getCost();
+
+            float distanceFactor = Mathf.Clamp01(tree[i].getDistance() / 3000f);
+            int scaledCost = Mathf.RoundToInt(tree[i].getCost() * distanceFactor);
+
+            if (scaledCost == 0)
+            {
+                scaledCost = 1;
+            }
+            
+            totalConnectionsCost += scaledCost;
+
 
             switch (tree[i].getResistance())
             {
