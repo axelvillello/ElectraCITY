@@ -32,7 +32,7 @@ public class FontManager : MonoBehaviour
                 break;
 
             case 1:
-                staticValues.textFont = "LiberationSans";
+                staticValues.textFont = "OpenDyslexic-Regular";
                 break;
 
         }
