@@ -38,6 +38,7 @@ public class Consumers : MonoBehaviour
         transform.GetComponent<ConnectorGen>().GenerateConnectors();
         genSpriteID = checkSprite(pointValue);
         this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites[genSpriteID];
+        this.transform.GetChild(0).GetComponent<SpriteRenderer>().color = randomColor(this.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
     }
 
     public void reDraw()
@@ -98,6 +99,16 @@ public class Consumers : MonoBehaviour
         }
         return spriteID;
     }
+
+    //Applies a random color tint to the sprite
+    public Color randomColor(Color originalColor)
+    {
+        Color randomColor = new Color(Random.Range(0.7f, 1f), Random.Range(0.7f, 1f), Random.Range(0.7f, 1f), 1f);
+        randomColor = originalColor * randomColor;
+
+        return randomColor;
+    }
+
     public int getPoint() { return pointValue; }
 
     public bool getInGen()
