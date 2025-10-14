@@ -422,6 +422,43 @@ public class Global : MonoBehaviour
         }
         return (black, red, yellow);
     }
+
+    public int getBlackCostPenalty()
+    {
+        int wireScore = 0;
+        foreach (GameObject gen in Generators)
+        {
+            Generators genSc = gen.GetComponent<Generators>();
+            wireScore += genSc.getBlackConnectionsCost();
+        }
+
+        return wireScore;
+    }
+
+    public int getRedCostPenalty()
+    {
+        int wireScore = 0;
+        foreach (GameObject gen in Generators)
+        {
+            Generators genSc = gen.GetComponent<Generators>();
+            wireScore += genSc.getRedConnectionsCost();
+        }
+
+        return wireScore;
+    }
+
+    public int getYellowCostPenalty()
+    {
+        int wireScore = 0;
+        foreach (GameObject gen in Generators)
+        {
+            Generators genSc = gen.GetComponent<Generators>();
+            wireScore += genSc.getYellowConnectionsCost();
+        }
+
+        return wireScore;
+    }
+
     public int getTotalPoweredCons() { return consumersOn; }
     public int getTotalConsumers() { return Consumers.Length; }
     public GameObject[] GetConsumers() {return Consumers;}
