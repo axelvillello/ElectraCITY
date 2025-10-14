@@ -12,6 +12,7 @@ public class Generators : MonoBehaviour
     [SerializeField] int powerGen;
     int totalConnectionsCost;
     int blackWireTotal, redWireTotal, yellowWireTotal;
+    int blackWireCost, redWireCost, yellowWireCost;
     bool tutorialObjectStatus = false;
 
     private void Start()
@@ -94,6 +95,10 @@ public class Generators : MonoBehaviour
         blackWireTotal = 0;
         redWireTotal = 0;
         yellowWireTotal = 0;
+        blackWireCost = 0;
+        redWireCost = 0;
+        yellowWireCost = 0;
+
         for (int i = 0; i < tree.Count; i++)
         {
             Debug.Log(tree[i].getSelf() + " from " + tree[i].getOrigin() + " at resistance " + tree[i].getResistance());
@@ -105,22 +110,25 @@ public class Generators : MonoBehaviour
             {
                 scaledCost = 1;
             }
-            
-            totalConnectionsCost += scaledCost;
 
 
             switch (tree[i].getResistance())
             {
                 case 3:
                     blackWireTotal++;
+                    blackWireCost = blackWireCost + scaledCost;
                     break;
                 case 1:
                     redWireTotal++;
+                    redWireCost = redWireCost + scaledCost;
                     break;
                 case 0:
                     yellowWireTotal++;
+                    yellowWireCost = yellowWireCost + scaledCost;
                     break;
             }
+
+            totalConnectionsCost += scaledCost;
         }
         return tree;
     }
@@ -163,6 +171,21 @@ public class Generators : MonoBehaviour
     public int getTotalConnectionsCost()
     {
         return totalConnectionsCost;
+    }
+
+    public int getBlackConnectionsCost()
+    {
+        return blackWireCost;
+    }
+
+    public int getRedConnectionsCost()
+    {
+        return redWireCost;
+    }
+
+    public int getYellowConnectionsCost()
+    {
+        return yellowWireCost;
     }
 
     public (int black, int red, int yellow) getTotalWires()

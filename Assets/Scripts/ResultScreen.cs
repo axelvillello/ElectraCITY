@@ -28,9 +28,10 @@ public class ResultScreen : MonoBehaviour
         var wireTotals = global.getWireScores();
 
         BaseScore.text = "Income: " + totalScore[0];
-        WireScore.text = "Black Wires: " + wireTotals.black + " x -1 = -" + wireTotals.black + "\n"
-        + "Red Wires: " + wireTotals.red + " x -3 = -" + wireTotals.red*3 + "\n"
-        + "Yellow Wires: " + wireTotals.yellow + " x -10 = -" + wireTotals.yellow*10;
+        WireScore.text =
+            "Blue Wire: -" + global.getBlackCostPenalty() + "\n"
+            + "Red Wire: -" + global.getRedCostPenalty() + "\n"
+            + "Yellow Wire: -" + global.getYellowCostPenalty();
         //BuildingCost.text =
         FinalScore.text = "Final Score = " + (totalScore[0] - totalScore[1]);   //Placeholder until building cost is implemented
     }
