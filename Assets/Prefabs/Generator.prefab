@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2773692345562374957}
   - component: {fileID: 147549407578129978}
   - component: {fileID: -2112998837405915813}
+  - component: {fileID: 3300475276170418478}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Generator
@@ -78,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d41910d8fd03c784b8b4f851096e98e5, type: 3}
+  m_Sprite: {fileID: 3552310359859492450, guid: 542180d5381d91d4086b20992c174bd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.6666667, y: 2.6666667}
+  m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -102,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConnectorNumber: 1
+  Connectors: []
   ConnectorPrefab: {fileID: 1718411259382570409, guid: 4fa28c22b40bc5541ab42403139d5aff, type: 3}
 --- !u!114 &-2112998837405915813
 MonoBehaviour:
@@ -116,3 +118,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerGen: 10
+--- !u!114 &3300475276170418478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800856516672319403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0ccd2e2f93c4a48a32490f2761298d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformToAffect: {fileID: 2011137805651523356}
+  axisToAffect: 3
+  animationDuration: 0.5
+  canBeOverwritten: 0
+  playOnStart: 1
+  initialScale: 1
+  maximumScale: 1.3
+  resetToInitialScaleAfterAnimation: 1
+  squashAndStretchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

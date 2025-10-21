@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConnectorNumber: 1
+  Connectors: []
   ConnectorPrefab: {fileID: 1718411259382570409, guid: 4fa28c22b40bc5541ab42403139d5aff, type: 3}
 --- !u!114 &2100161611206090323
 MonoBehaviour:
@@ -152,7 +153,7 @@ GameObject:
   - component: {fileID: 6331018571315424610}
   m_Layer: 5
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,7 +310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.79, y: 0.03}
+  m_AnchoredPosition: {x: 1.136, y: -0.234}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &4026715744304912456
@@ -403,8 +404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.44000244, y: 0.33999634}
+  m_SizeDelta: {x: -1.1199951, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6330659141322166960
 Canvas:
@@ -495,8 +496,8 @@ Transform:
   m_GameObject: {fileID: 7505090894274644060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.417439, y: 0.417439, z: 1}
-  m_LocalScale: {x: 3.3348775, y: 3.3348775, z: 0}
+  m_LocalPosition: {x: -0.42, y: 0.920496, z: 1}
+  m_LocalScale: {x: 4.3409934, y: 4.3409934, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8750362793022900083}

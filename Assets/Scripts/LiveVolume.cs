@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,21 +7,25 @@ public class LiveVolume : MonoBehaviour
     [SerializeField] GameObject textObj;
     private TMP_Text textField;
     public AudioSource click;
-
+    private StaticValues staticValues;
     public Slider volumeSlider;
-    // Start is called before the first frame update
+    
     private void Start()
     {
+        staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
         textField = textObj.GetComponent<TMP_Text>();
-        textField.text = (this.GetComponent<Slider>().value).ToString();
-        volumeSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+        volumeSlider.value = staticValues.volume;
+        textField.text = this.GetComponent<Slider>().value.ToString();
         click.volume = this.GetComponent<Slider>().value;
+        volumeSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
     }
 
     void ValueChangeCheck()
     {
-        textField.text = (this.GetComponent<Slider>().value).ToString();
-        click.volume = this.GetComponent<Slider>().value/100;
+        float newVolume = volumeSlider.value;
+        textField.text = newVolume.ToString();
+        staticValues.volume = newVolume;
+        click.volume = newVolume/100;
         click.Play();
     }
 

@@ -5,7 +5,6 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using System.Numerics;
 
 
 public class SquashAndStretch : MonoBehaviour
@@ -15,7 +14,7 @@ public class SquashAndStretch : MonoBehaviour
     [SerializeField] private SquashAndStretchAxis axisToAffect = SquashAndStretchAxis.Y;
     [SerializeField, Range(0, 1f)] private float animationDuration = 0.25f;
     [SerializeField] private bool canBeOverwritten;
-    [SerializeField] private bool playOnStart; //may not need
+    [SerializeField] private bool playOnStart; 
 
     [Flags]
     public enum SquashAndStretchAxis

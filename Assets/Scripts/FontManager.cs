@@ -8,6 +8,8 @@ public class FontManager : MonoBehaviour
     private Font font;
     private TMP_FontAsset fontAsset;
 
+    private readonly System.Collections.Generic.Dictionary<TMP_Text, float> originalSizes = new();
+
     private void Awake()
     {
         staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
@@ -17,10 +19,6 @@ public class FontManager : MonoBehaviour
     {
         ChangeFont();
         UpdateFont();
-    }
-    void Update()
-    {
-        
     }
 
     public void FontSelection(int input)
@@ -47,30 +45,34 @@ public class FontManager : MonoBehaviour
 
     public void UpdateFont()
     {
-        foreach (GameObject asset in sceneAssets)
+        TMP_Text[] allTexts = Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None);
+
+        foreach (TMP_Text text in allTexts)
         {
-            if (asset.transform.gameObject.CompareTag("Text"))
+            if (text.CompareTag("Text"))
             {
-                asset.transform.gameObject.GetComponent<TMP_Text>().font = fontAsset;
+                if (!originalSizes.ContainsKey(text))
+                {
+                    originalSizes[text] = text.fontSize;
+                }
+
+                text.font = fontAsset;
+
+                if (staticValues.textFont == "OpenDyslexic-Regular")
+                {
+                    text.fontSize = originalSizes[text] * 0.55f;
+                }
+                else
+                {
+                    text.fontSize = originalSizes[text];
+                }
+
+                var matInstance = fontAsset.material;
+                matInstance.SetFloat(ShaderUtilities.ID_OutlineWidth, 0.15f);
+                matInstance.SetColor(ShaderUtilities.ID_OutlineColor, Color.white);
+
+                text.fontSharedMaterial = matInstance;
             }
-
-            foreach (Transform child in asset.transform)
-            {
-                FindAssetWithTag(child);
-            }
-        }
-    }
-
-    public void FindAssetWithTag(Transform parent)  //Recursive function used using Transforms instead of GameObject
-    {
-        if (parent.gameObject.CompareTag("Text"))
-        {
-            parent.gameObject.GetComponent<TMP_Text>().font = fontAsset;
-        }
-
-        foreach (Transform child in parent)
-        {
-            FindAssetWithTag(child);
         }
     }
 

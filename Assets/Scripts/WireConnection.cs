@@ -78,9 +78,9 @@ public class WireConnection : MonoBehaviour
                 //Debug.Log("None");
                 break;
             case 1:
-                //Debug.Log("Black");
-                lineRenderer.startColor = new Color(58f / 255f, 129f / 255f, 255f / 255f);
-                lineRenderer.endColor = new Color(58f / 255f, 129f / 255f, 255f / 255f);
+                //Debug.Log("Blue");
+                lineRenderer.startColor = new Color(135f / 255f, 206f / 250f, 255f / 255f);
+                lineRenderer.endColor = new Color(135f / 255f, 206f / 255f, 255f / 255f);
                 maxDelta = 10000;
                 break;
             case 2:

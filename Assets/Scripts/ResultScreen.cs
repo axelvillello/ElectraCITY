@@ -33,6 +33,6 @@ public class ResultScreen : MonoBehaviour
             + "Red Wire: -" + global.getRedCostPenalty() + "\n"
             + "Yellow Wire: -" + global.getYellowCostPenalty();
         //BuildingCost.text =
-        FinalScore.text = "Final Score = " + (totalScore[0] - totalScore[1]);   //Placeholder until building cost is implemented
+        FinalScore.text = "Final Score: " + (totalScore[0] - totalScore[1]);   //Placeholder until building cost is implemented
     }
 }

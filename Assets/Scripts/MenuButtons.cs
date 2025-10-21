@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,10 +11,12 @@ public class MenuButtons : MonoBehaviour
     private ResultScreen ScoreDisplay;
     private RectTransform btn;
     private Vector3 originalSize, hoveredSize;
+    private GameObject self;
 
 
     private void Start()
     {
+        self = this.gameObject;
         staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
         audio = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<AudioManager>();
 
@@ -70,7 +69,8 @@ public class MenuButtons : MonoBehaviour
     }
     public void OnOptionsApplyButton()
     {
-        staticValues.SetVolume(ScreenToOpen.GetComponentInChildren<Slider>().value);
+        //staticValues.SetVolume(ScreenToOpen.GetComponentInChildren<Slider>().value);
+        ScreenToOpen.SetActive(!ScreenToOpen.activeSelf);
         audio.Play("MenuClick");
     }
 
@@ -95,12 +95,12 @@ public class MenuButtons : MonoBehaviour
 
     public void OnMouseOver()
     {
-        btn.localScale = hoveredSize;
+        self.transform.GetComponent<SquashAndStretch>().PlaySquashAndStretchEffect();
         
     }
 
     public void OnMouseExit()
     {
-        btn.localScale = originalSize;
+        self.transform.GetComponent<SquashAndStretch>().PlaySquashAndStretchEffect();
     }
 }
