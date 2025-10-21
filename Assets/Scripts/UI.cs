@@ -23,7 +23,7 @@ public class UI : MonoBehaviour
     {
         //A system to add a score tally and display a value according to a global score variable
         totalScore = global.getTotalScore();
-        score.text = "Score: " + (totalScore[0] - totalScore[1]) + "\n" + "Income: " + totalScore[0] + " | Cost: " + totalScore[1];
+        score.text = "SCORE: " + (totalScore[0] - totalScore[1]) + "\n" + "Cost: " + totalScore[1];
         progress.text = global.getTotalPoweredCons() + "/" + global.getTotalConsumers() + "\n" + " Powered";
     }
 

@@ -86,26 +86,26 @@ public class Global : MonoBehaviour
         {
             case 0:
                 //Scenario 0 (Base Scenario)
-                scenario.setGen(4);
-                scenario.setCon(30);
+                scenario.setGen(2);
+                scenario.setCon(10);
                 break;
             case 1:
                 //Scenario 1 (No Super, Only 2 Gens)
                 scenario.setGen(2);
-                scenario.setCon(30);
+                scenario.setCon(20);
                 scenario.setYellow(false);
                 break;
             case 2:
                 //Scenario 2
-                scenario.setGen(4);
+                scenario.setGen(3);
                 scenario.setCon(30);
                 scenario.setYellow(false);
                 scenario.setRed(false);
                 break;
             case 100:
                 //Tutorial
-                scenario.setGen(4);
-                scenario.setCon(30);
+                scenario.setGen(1);
+                scenario.setCon(5);
                 Tutorial.SetActive(true);   //May update to a tutorial class object insteads
                 break;
             default:

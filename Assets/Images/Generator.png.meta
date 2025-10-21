@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: d41910d8fd03c784b8b4f851096e98e5
+guid: 542180d5381d91d4086b20992c174bd7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8011775145534436228
-    second: Generator_0
-  - first:
-      213: -5235995009030482995
-    second: Generator_1
-  - first:
-      213: 3115184897024289824
-    second: Generator_2
+      213: 3552310359859492450
+    second: Generator 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 130
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Generator_0
+      name: Generator 1_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 10
-        width: 21
-        height: 61
+        x: 0
+        y: 0
+        width: 320
+        height: 320
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,52 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c7ccd1e04f470d090800000000000000
-      internalID: -8011775145534436228
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Generator_1
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 21
-        width: 23
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dc31501e7420657b0800000000000000
-      internalID: -5235995009030482995
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Generator_2
-      rect:
-        serializedVersion: 2
-        x: 51
-        y: 10
-        width: 21
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 02c6bcca82c5b3b20800000000000000
-      internalID: 3115184897024289824
+      spriteID: 2667d5b83775c4130800000000000000
+      internalID: 3552310359859492450
       vertices: []
       indices: 
       edges: []
@@ -188,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Generator_0: -8011775145534436228
-      Generator_1: -5235995009030482995
-      Generator_2: 3115184897024289824
+      Generator 1_0: 3552310359859492450
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

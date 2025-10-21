@@ -1,13 +1,18 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class OptionsFont : MonoBehaviour
 {
-    public TMP_Dropdown inputFont;
-    public FontManager fontManager;
+    [SerializeField] Button Default; // Button for ThaleahFat_TTF
+    [SerializeField] Button Dyslexic; // Button for OpenDyslexic-Regular
+    private FontManager fontManager;
+
     private void Awake()
     {
         fontManager = GameObject.FindFirstObjectByType<FontManager>();
-        inputFont.onValueChanged.AddListener(fontManager.FontSelection);
+
+        Default.onClick.AddListener(() => fontManager.FontSelection(0));
+        Dyslexic.onClick.AddListener(() => fontManager.FontSelection(1));
     }
 }
