@@ -7,14 +7,19 @@ using System;
 using System.Collections;
 
 
+
 public class SquashAndStretch : MonoBehaviour
 {
-    [Header("Squash and Stretch Core")]
+    [Header("Squash and Stretch Settings")]
     [SerializeField] private Transform transformToAffect;
     [SerializeField] private SquashAndStretchAxis axisToAffect = SquashAndStretchAxis.Y;
     [SerializeField, Range(0, 1f)] private float animationDuration = 0.25f;
     [SerializeField] private bool canBeOverwritten;
     [SerializeField] private bool playOnStart; 
+
+    [Header("Looping Settings")] 
+        [SerializeField] private bool looping;
+        [SerializeField, Range(0, 1f)] private float loopingDelay = 0.5f;
 
     [Flags]
     public enum SquashAndStretchAxis
@@ -40,6 +45,7 @@ public class SquashAndStretch : MonoBehaviour
 
     private Coroutine _squashAndStrechCoroutine;
     private UnityEngine.Vector3 _initialVectorScale;
+    private WaitForSeconds _loopingDelayWaitForSeconds;
     private bool affectX => (axisToAffect & SquashAndStretchAxis.X) != 0;
     private bool affectY => (axisToAffect & SquashAndStretchAxis.Y) != 0;
     private bool affectZ => (axisToAffect & SquashAndStretchAxis.Z) != 0;
@@ -50,6 +56,7 @@ public class SquashAndStretch : MonoBehaviour
             transformToAffect = transform;
 
         _initialVectorScale = transformToAffect.localScale;
+        _loopingDelayWaitForSeconds = new WaitForSeconds(loopingDelay);
 
     }
     void Start()
@@ -60,6 +67,8 @@ public class SquashAndStretch : MonoBehaviour
 
     public void PlaySquashAndStretchEffect()
     {
+        if (looping && !canBeOverwritten) 
+                return;
         CheckForAndStartCoroutine();
      }
 
@@ -77,44 +86,54 @@ public class SquashAndStretch : MonoBehaviour
 
     private IEnumerator SquashAndStretchEffect()
     {
-        float elapsedTime = 0;
-        UnityEngine.Vector3 originalScale = _initialVectorScale;
-        UnityEngine.Vector3 modifiedScale = originalScale;
-
-        while (elapsedTime < animationDuration)
+        do
         {
-            elapsedTime += Time.deltaTime;
-            float curvePosition = elapsedTime / animationDuration;
-            float curveValue = squashAndStretchCurve.Evaluate(curvePosition);
-            float remappedValue = initialScale + (curveValue * (maximumScale - initialScale));
+            float elapsedTime = 0;
+            UnityEngine.Vector3 originalScale = _initialVectorScale;
+            UnityEngine.Vector3 modifiedScale = originalScale;
 
-            //Ensures no division by 0 can occur
-            float minimumThreshold = 0.0001f;
-            if (Mathf.Abs(remappedValue) < minimumThreshold)
-                remappedValue = minimumThreshold;
+            while (elapsedTime < animationDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float curvePosition = elapsedTime / animationDuration;
+                float curveValue = squashAndStretchCurve.Evaluate(curvePosition);
+                float remappedValue = initialScale + (curveValue * (maximumScale - initialScale));
 
-            if (affectX)
-                modifiedScale.x = originalScale.x * remappedValue;
-            else
-                modifiedScale.x = originalScale.x / remappedValue;
+                //Ensures no division by 0 can occur
+                float minimumThreshold = 0.0001f;
+                if (Mathf.Abs(remappedValue) < minimumThreshold)
+                    remappedValue = minimumThreshold;
 
-            if (affectY)
-                modifiedScale.y = originalScale.y * remappedValue;
-            else
-                modifiedScale.y = originalScale.y / remappedValue;
+                if (affectX)
+                    modifiedScale.x = originalScale.x * remappedValue;
+                else
+                    modifiedScale.x = originalScale.x / remappedValue;
 
-            if (affectZ)
-                modifiedScale.z = originalScale.z * remappedValue;
-            else
-                modifiedScale.z = originalScale.z / remappedValue;
+                if (affectY)
+                    modifiedScale.y = originalScale.y * remappedValue;
+                else
+                    modifiedScale.y = originalScale.y / remappedValue;
 
-            transformToAffect.localScale = modifiedScale;
+                if (affectZ)
+                    modifiedScale.z = originalScale.z * remappedValue;
+                else
+                    modifiedScale.z = originalScale.z / remappedValue;
 
-            yield return null;
-        }
+                transformToAffect.localScale = modifiedScale;
 
-        if (resetToInitialScaleAfterAnimation)
-            transformToAffect.localScale = originalScale;
+                yield return null;
+            }
+
+            if (resetToInitialScaleAfterAnimation)
+                transformToAffect.localScale = originalScale;
+
+            if (looping)
+            {
+                yield return _loopingDelayWaitForSeconds;
+            }
+            
+        } while (looping);
     }
+
 
 }

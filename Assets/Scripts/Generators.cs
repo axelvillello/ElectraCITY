@@ -106,24 +106,30 @@ public class Generators : MonoBehaviour
             float distanceFactor = Mathf.Clamp01(tree[i].getDistance() / 3000f);
             int scaledCost = Mathf.RoundToInt(tree[i].getCost() * distanceFactor);
 
-            if (scaledCost == 0)
-            {
-                scaledCost = 1;
-            }
-
-
             switch (tree[i].getResistance())
             {
                 case 3:
                     blackWireTotal++;
+                    if (scaledCost == 0)
+                    {
+                        scaledCost = 1;
+                    }
                     blackWireCost = blackWireCost + scaledCost;
                     break;
                 case 1:
                     redWireTotal++;
+                    if (scaledCost == 0 || scaledCost < 2)
+                    {
+                        scaledCost = 2;
+                    }
                     redWireCost = redWireCost + scaledCost;
                     break;
                 case 0:
                     yellowWireTotal++;
+                    if (scaledCost == 0 || scaledCost < 3)
+                    {
+                        scaledCost = 3;
+                    }
                     yellowWireCost = yellowWireCost + scaledCost;
                     break;
             }
