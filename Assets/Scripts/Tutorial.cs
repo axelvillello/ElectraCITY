@@ -60,6 +60,9 @@ public class Tutorial : MonoBehaviour
                 case 27:
                     MoveCursor(GameObject.Find("R-Wire"));
                     break;
+                case 30:
+                    tutorialCursor.SetActive(false);
+                    break;
                 default:
                     break;
             }
@@ -79,25 +82,25 @@ public class Tutorial : MonoBehaviour
         tutorialCursor.transform.position = target.transform.position + new UnityEngine.Vector3(width, 200, 0);
     }
 
-GameObject FindClosestGenerator(UnityEngine.Vector3 currentPosition)
-{
-    GameObject[] generators = GameObject.FindGameObjectsWithTag("Generator");
-    GameObject closest = null;
-    float minDistance = Mathf.Infinity;
-
-    foreach (GameObject generator in generators)
+    GameObject FindClosestGenerator(UnityEngine.Vector3 currentPosition)
     {
-        float dist = UnityEngine.Vector3.Distance(currentPosition, generator.transform.position);
-        if (dist < minDistance)
+        GameObject[] generators = GameObject.FindGameObjectsWithTag("Generator");
+        GameObject closest = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (GameObject generator in generators)
         {
-            minDistance = dist;
-            closest = generator;
+            float dist = UnityEngine.Vector3.Distance(currentPosition, generator.transform.position);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                closest = generator;
+            }
         }
-    }
 
-        closest.GetComponent<Generators>().setTutorialObjectStatus(true);
+            closest.GetComponent<Generators>().setTutorialObjectStatus(true);
 
-    return closest;
+        return closest;
 }
 
 

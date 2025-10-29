@@ -10,7 +10,7 @@ public class StaticValues : MonoBehaviour
     public float volume;
     public string seed;
     public int scenario = 0;
-    public float textSpd = 5;
+    public float textSpd = 8;
     public int colorFilter = 0;
     public string textFont;
 

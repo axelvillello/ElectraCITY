@@ -80,6 +80,14 @@ public class MenuButtons : MonoBehaviour
         audio.Play("MenuClick");
     }
 
+    public void OnFinishConfirmButton()
+    {
+        ScreenToOpen.SetActive(!ScreenToOpen.activeSelf);
+        GameObject finishBtn = GameObject.FindGameObjectWithTag("Finish");
+        finishBtn.SetActive(false);
+        audio.Play("MenuClick");
+    }
+
     public void OnReturnToMenuButton()
     {
         audio.Play("MenuClick");

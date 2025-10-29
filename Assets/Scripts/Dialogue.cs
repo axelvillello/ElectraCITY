@@ -3,12 +3,14 @@
 //Author: Axel Ello
 
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using System.Numerics;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 
 public class Dialogue : MonoBehaviour
 {
@@ -183,7 +185,7 @@ public class Dialogue : MonoBehaviour
                 break; 
 
             case 21:
-                bool unpoweredBuilding = false;
+                bool unpoweredBuilding = true; //set to true for testing 
 
                 PopulateTutorialConsumers(tutorialBuilding);
 
@@ -227,7 +229,11 @@ public class Dialogue : MonoBehaviour
                     currentNode.Value.nextStepReady = true;
                     currentNode.Value.isClickable = true;
                 }
-                
+
+                break;
+
+            case 34:
+                dialogueBox.gameObject.SetActive(false);
                 break;
 
             default:
@@ -274,8 +280,12 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator TypeText(string line)   //Typewriter effect for dialogue messages
     {
-        float delay = 0.1f/staticValues.textSpd;
+        float delay = 0.1f / staticValues.textSpd;
+
+        messageContent.text = line;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(dialogueBox.GetComponent<RectTransform>());
         messageContent.text = "";
+        
         foreach (char letter in line.ToCharArray())
         {
             messageContent.text += letter;

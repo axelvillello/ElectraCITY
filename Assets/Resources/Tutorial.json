@@ -13,12 +13,12 @@
         },
         {
             "id": 2,
-            "content": "Direct power from the power generators to nearby buildings!",
+            "content": "Direct power from the generators to the buildings.",
             "retraceSteps": 0
         },
         {
             "id": 3,
-            "content": "To link generators to buildings you will need to connect wires between them.",
+            "content": "You need to connect wires between generators and the buildings.",
             "retraceSteps": 0
         },
         {
@@ -28,12 +28,12 @@
         },
         {
             "id": 5,
-            "content": "Black wires are the cheapest as they only cost $1.",
+            "content": "Blue wires are the cheapest.",
             "retraceSteps": 0
         },
         {
             "id": 6,
-            "content": "They don't stretch out far, and they have high resistance.",
+            "content": "However they have high electrical resistance.",
             "retraceSteps": 0
         },
         {
@@ -43,22 +43,22 @@
         },
         {
             "id": 8,
-            "content": "Red wires are more expensive than black wires, costing $3.",
+            "content": "Red wires are more expensive than blue wires.",
             "retraceSteps": 0
         },
         {
             "id": 9,
-            "content": "While they cost more, they have lower resistance than black wires.",
+            "content": "They cost more, but they have lower resistance than blue wires.",
             "retraceSteps": 0
         },
         {
             "id": 10,
-            "content": "Yellow wires are the most expensive with a cost of $10.",
+            "content": "Yellow wires are the MOST expensive.",
             "retraceSteps": 0
         },
         {
             "id": 11,
-            "content": "They are very powerful as they can stretch INFINITELY, and have no resistance!",
+            "content": "They are very powerful as they have no resistance!",
             "retraceSteps": 0
         },
         {
@@ -68,7 +68,7 @@
         },
         {
             "id": 13,
-            "content": "Click on the black wire to select it.",
+            "content": "Click on the blue wire to select it.",
             "retraceSteps": 0
         },
         {
@@ -93,7 +93,7 @@
         },
         {
             "id": 18,
-            "content": "Connect a black wire between the powered building, and a nearby unpowered building!",
+            "content": "Connect a blue wire between the powered building, and a nearby unpowered building!",
             "retraceSteps": 0
         },
         {
@@ -108,7 +108,7 @@
         },
         {
             "id": 21,
-            "content": "Continue to connect buildings together with black wires.",
+            "content": "Continue to connect buildings together with blue wires.",
             "retraceSteps": 0
         },
         {
@@ -138,17 +138,42 @@
         },
         {
             "id": 27,
-            "content": "Now replace the deleted black wire with a red one instead!",
+            "content": "Now replace the deleted blue wire with a red one instead!",
             "retraceSteps": 0
         },
         {
             "id": 28,
-            "content": "Red wires have lower resistance than black wires.",
+            "content": "Red wires have lower resistance than blue wires.",
             "retraceSteps": 0
         },
         {
             "id": 29,
-            "content": "This means there is more electricity leaving the powered building than when you used the black wire!",
+            "content": "This means there is more electricity leaving the powered building than when you used the blue wire!",
+            "retraceSteps": 0
+        },
+        {
+            "id": 30,
+            "content": "You now know the basics of ElectraCITY!",
+            "retraceSteps": 0
+        },
+        {
+            "id": 31,
+            "content": "Press finish whenever you feel ready.",
+            "retraceSteps": 0
+        },
+        {
+            "id": 32,
+            "content": "Feel free to try out the yellow wire.",
+            "retraceSteps": 0
+        },
+        {
+            "id": 33,
+            "content": "Or you return to the main menu and press START to try a real game!",
+            "retraceSteps": 0
+        },
+        {
+            "id": 34,
+            "content": "CLOSE DIALOGUE",
             "retraceSteps": 0
         }
 
