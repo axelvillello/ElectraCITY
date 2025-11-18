@@ -3,7 +3,7 @@
 ---
 **Authors:** TBA, Axel Ello <br>
 **Game Engine:** Unity <br>
-**Description:** > 
+**Description:**
 - Draw electricity from the generators to power the city! 
 - Connect wires between buildings to extend the powerline and score points based on the powered building
 - Challenge yourself with 3 levels of difficulty and options to remove different kinds of wires
