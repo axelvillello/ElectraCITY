@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
+//Name: Generators
+//Description: Handles logic for a "powerline" of connected generators and consumers
+
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class Generators : MonoBehaviour
@@ -22,7 +21,7 @@ public class Generators : MonoBehaviour
         Plant();
     }
 
-
+    //Adds connected nodes to the list tree
     public void Plant()
     {
         connectionTree = new List<Node>();
@@ -55,6 +54,7 @@ public class Generators : MonoBehaviour
             else if (currentObject.tag == "Consumer")
             {
                 //currentObject.gameObject.GetComponent<Consumers>().setInGen(true);
+
                 //How many used connections in the object
                 Node[] toSort = new Node[currentObject.transform.childCount];
                 for (int i = 3; i < currentObject.transform.childCount; i++)
@@ -139,6 +139,7 @@ public class Generators : MonoBehaviour
         return tree;
     }
 
+    //Checks the power status of all nodes in the tree
     private void PowerLine()
     {
         foreach (Node item in connectionTree)

@@ -1,6 +1,6 @@
 //Name: Dialogue System
 //Description: Definiton for dialogue objects that populate text boxes. Intended for tutorial usage
-//Author: Axel Ello
+//             and treats each line of dialogue as a "step" 
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +8,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using System.Numerics;
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 
 public class Dialogue : MonoBehaviour
 {
@@ -52,11 +49,11 @@ public class Dialogue : MonoBehaviour
         StartCoroutine(TypeText(currentNode.Value.content));
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckDialogueBehaviour();
         
+        //Progress dialogue if mouse button is clicked or if the node flags progress to next dialogue step
         if (Input.GetMouseButtonDown(0) || (currentNode.Value.nextStepReady == true))
         {
             if (currentNode.Value.isClickable == true)
@@ -79,17 +76,19 @@ public class Dialogue : MonoBehaviour
             }
         }
 
+        //Applies an animation to the click icon
         if (clickableIndicator.activeSelf == true && !isBobbing)
             {
                 StartCoroutine(IconBounceDelay());
             }
     }
 
+    //Determines behaviour of dialogue at certain steps
     private void CheckDialogueBehaviour()
     {   
         switch (tutorialSystem.dialogueCounter)
         {
-            case 13:
+            case 13: //Progresses when user clicks the blue wire
                 if (blackWire.GetComponent<WireAttach>().selected == false)
                 {
                     currentNode.Value.isClickable = false;
@@ -102,7 +101,7 @@ public class Dialogue : MonoBehaviour
 
                 break;
 
-            case 14:
+            case 14: //Progresses when user connects a wire into the generator
                 bool genSelected = false;
 
                 for (int i = 0; i < tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors.Length; i++)
@@ -125,7 +124,7 @@ public class Dialogue : MonoBehaviour
 
                 break;
 
-            case 15:
+            case 15: //Progresses when user connects a wire between the generator and a consumer
                 bool genConnected = false;
 
                 for (int i = 0; i < tutorialSystem.tutGenerator.GetComponent<ConnectorGen>().Connectors.Length; i++)
@@ -150,7 +149,7 @@ public class Dialogue : MonoBehaviour
 
                 break;
 
-            case 18:
+            case 18: //Progresses when a wire is connected between a building and another
                 bool buildingConnected = false;
 
                 for (int i = 0; i < tutorialBuilding.GetComponentInParent<ConnectorGen>().Connectors.Length; i++)
@@ -166,9 +165,7 @@ public class Dialogue : MonoBehaviour
                                 buildingConnected = true;
                             }
                         }
-
                         tutorialConnections.Add(tutorialBuilding.GetComponentInParent<ConnectorGen>().Connectors[i].GetComponent<WireConnection>().otherConnector.GetComponent<WireConnection>().getParent());
-
                     }
                 }
                 
@@ -182,9 +179,13 @@ public class Dialogue : MonoBehaviour
                     currentNode.Value.isClickable = true;
                 }
 
-                break; 
+                break;
+
+            /*
+            //Depreciated step that progresses when a powerline is created and a building has not received power
 
             case 21:
+                
                 bool unpoweredBuilding = true; //set to true for testing 
 
                 PopulateTutorialConsumers(tutorialBuilding);
@@ -217,7 +218,7 @@ public class Dialogue : MonoBehaviour
                         }
 
                     }
-                
+                    
                 }
 
                 if (unpoweredBuilding == false)
@@ -231,8 +232,9 @@ public class Dialogue : MonoBehaviour
                 }
 
                 break;
+            */
 
-            case 34:
+            case 28: //End of current JSON file for dialogue, dialogue box becomes inactive in the scene
                 dialogueBox.gameObject.SetActive(false);
                 break;
 
@@ -242,6 +244,8 @@ public class Dialogue : MonoBehaviour
             }
         
     }
+
+    //Unused function for reverting to a previous step of dialogue
     public void DialogueRetrace(int reSteps)
     {
         for (int i = 0; i < reSteps; i++)
@@ -253,6 +257,7 @@ public class Dialogue : MonoBehaviour
         StartCoroutine(TypeText(currentNode.Value.content));
     }
 
+    //Finds all consumer objects needed for the tutorial
     private void PopulateTutorialConsumers(GameObject building)
     {
         GameObject currentBuilding;
@@ -271,16 +276,16 @@ public class Dialogue : MonoBehaviour
                         PopulateTutorialConsumers(currentBuilding);
                     }
                 }
-
             }
         }
 
         return;
     }
 
-    private IEnumerator TypeText(string line)   //Typewriter effect for dialogue messages
+    //Typewriter effect for dialogue messages
+    private IEnumerator TypeText(string line)   
     {
-        float delay = 0.1f / staticValues.textSpd;
+        float delay = 0.1f / staticValues.textSpd; //Speed of text typewriting 
 
         messageContent.text = line;
         LayoutRebuilder.ForceRebuildLayoutImmediate(dialogueBox.GetComponent<RectTransform>());
@@ -292,11 +297,12 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
 
-        if (currentNode.Value.isClickable == true)
+        if (currentNode.Value.isClickable == true) //Displays click icon when dialogue step is fully "typed out"
             clickableIndicator.SetActive(true);
 
     }
 
+    //A bobbing animation for the click icon
     private IEnumerator IconBounceDelay()
     {
         isBobbing = true;

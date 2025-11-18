@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+//Name: Static Values
+//Description: Global variables used throughout the runtime of the game
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class StaticValues : MonoBehaviour
 {
     private static StaticValues instance;
-
-    public float volume;
+    public float volume = 50.0f;
     public string seed;
     public int scenario = 0;
-    public float textSpd = 8;
+    public float textSpd = 5;
     public int colorFilter = 0;
     public string textFont;
+    public bool blueWires = true;
+    public bool redWires = true;
+    public bool yellowWires = true;
 
     private void Awake()
     {
@@ -29,7 +31,6 @@ public class StaticValues : MonoBehaviour
 
     private void Start()
     {
-        volume = 50.0f;
         textFont = "ThaleahFat_TTF";
     }
 

@@ -1,3 +1,6 @@
+//Name: Menu Buttons
+//Description: Navigation and handling of UI buttons
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,12 +23,11 @@ public class MenuButtons : MonoBehaviour
         staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
         audio = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<AudioManager>();
 
-        //Values required for button shrinking effect
+        //Depreciated: Values required for button shrinking effect
         btn = GetComponent<RectTransform>();
         originalSize = btn.localScale;
         hoveredSize = new Vector3(originalSize.x*0.9f, originalSize.y*0.9f, originalSize.z*0.9f);
     }
-
 
     public void OnStartButton()
     {
@@ -60,10 +62,27 @@ public class MenuButtons : MonoBehaviour
         audio.Play("MenuClick");
     }
 
+    //Specific logic for beginning a game scenario using input from the start game menu
     public void OnStartStartButton()
     {
         staticValues.seed = ScreenToOpen.GetComponentInChildren<TMP_InputField>().text;
         staticValues.scenario = ScreenToOpen.GetComponentInChildren<TMP_Dropdown>().value;
+
+        Toggle[] toggles = ScreenToOpen.GetComponentsInChildren<Toggle>(true);
+
+        foreach (Toggle tog in toggles)
+        {
+            if (tog.gameObject.name == "RedToggle")
+            {
+                staticValues.redWires = tog.isOn;
+            }
+
+            if (tog.gameObject.name == "YellowToggle")
+            {
+                staticValues.yellowWires = tog.isOn;
+            }
+        }
+
         audio.Play("MenuClick");
         SceneManager.LoadScene(1);
     }
@@ -101,10 +120,10 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    //Applies squash and stretch upon hovering over and away from UI objects
     public void OnMouseOver()
     {
         self.transform.GetComponent<SquashAndStretch>().PlaySquashAndStretchEffect();
-        
     }
 
     public void OnMouseExit()

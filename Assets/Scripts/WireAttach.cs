@@ -1,6 +1,7 @@
+//Name: Wire Attach
+//Description: Defines variables based on the wires selected 
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 

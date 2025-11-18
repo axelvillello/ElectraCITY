@@ -1,7 +1,9 @@
+//Name: Tooltips
+//Description: Handling of tooltips when hovering over a gameobject
+
 using UnityEngine;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 
 public class Tooltips: MonoBehaviour
 {
@@ -11,11 +13,13 @@ public class Tooltips: MonoBehaviour
     private TextMeshProUGUI tooltipValue;
     private bool tooltipActive = false;
     private Canvas canvas;
+
     void Awake()
     {
         tooltipValue = tooltipTransform.GetComponentInChildren<TextMeshProUGUI>();
         canvas = FindFirstObjectByType<Canvas>();
     }
+
     void Update()
     {
         if (tooltipActive)
@@ -27,10 +31,11 @@ public class Tooltips: MonoBehaviour
                 out Vector2 localPoint
             );
 
-            tooltipTransform.localPosition = localPoint + new Vector2(150f, 20f);
+            tooltipTransform.localPosition = localPoint + new Vector2(160f, 20f);
             tooltipTransform.gameObject.SetActive(true);
         }
     }
+
     public void ActivateTooltip()
     {
         StartCoroutine(ShowTooltipAfterDelay());

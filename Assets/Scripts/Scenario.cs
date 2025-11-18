@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//Name: Scenario
+//Description: Defines variables required for a selected when generating a game scene
 
 public class Scenario
 {

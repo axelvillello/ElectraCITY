@@ -1,5 +1,7 @@
+//Name: Options Font
+//Description: Provides method for font options in the UI to communicate with font manager in the scene
+
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class OptionsFont : MonoBehaviour

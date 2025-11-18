@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Mono.Cecil.Cil;
+//Name: UI
+//Description: Updates ingame the UI in realtime  
+
 using TMPro;
 using UnityEngine;
-
 
 public class UI : MonoBehaviour
 {
