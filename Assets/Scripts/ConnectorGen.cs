@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+//Name: Connector Generator
+//Description: Generation of "connector" circles below generators and consumer game objects
+
 using UnityEngine;
 
 public class ConnectorGen : MonoBehaviour

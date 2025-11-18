@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+//Name: Grid Object
+//Description: Handling for an individual grid space
+
 using UnityEngine;
 
 public class GridObject
@@ -11,6 +12,7 @@ public class GridObject
     private int[] coords;
     private bool occupied;
     private GameObject resource;
+
     public GridObject(float x, float y, float width, float height, int[] coords)
     {
         this.x = x;
@@ -19,7 +21,6 @@ public class GridObject
         this.height = height;
         this.coords = coords;
     }
-
 
     public float getX() { return x; }
     public float getY() { return y; }
@@ -30,6 +31,7 @@ public class GridObject
     public int[] getCoords() { return coords; }
     public int getCoordsX() { return coords[0]; }
     public int getCoordsY() { return coords[1]; }
+    
     public int getCoordsTotal() 
     {
         int totalCoords = coords[0] * coords[1];

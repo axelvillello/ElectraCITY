@@ -1,12 +1,11 @@
 //Adapted From: SquashAndStretch.cs
 //Original Author: ChristinaCreatesGames
 //GitHub Repo Link: https://github.com/Maraakis/ChristinaCreatesGames/blob/main/Squash%20and%20Stretch%20Animation%20with%20Code/SquashAndStretch.cs 
+//Description: Applies a defined squash and stretch effect to attached gameobjects
 
 using UnityEngine;
 using System;
 using System.Collections;
-
-
 
 public class SquashAndStretch : MonoBehaviour
 {
@@ -134,6 +133,4 @@ public class SquashAndStretch : MonoBehaviour
             
         } while (looping);
     }
-
-
 }

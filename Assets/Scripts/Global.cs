@@ -1,5 +1,7 @@
+//Name: Global
+//Description: Provides various main functions during the main game scene 
+
 using System;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
@@ -28,6 +30,7 @@ public class Global : MonoBehaviour
     public Camera mainCamera;
     public int wireOhm;
     public int wireID = 0;
+
     //0: None Selected
     //1: Black Wire
     //2: Red Wire
@@ -37,13 +40,14 @@ public class Global : MonoBehaviour
     [SerializeField] GameObject GeneratorPrefab;
     [SerializeField] GameObject BGObject;
     [SerializeField] GameObject Tutorial;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             uiImage = GameObject.FindGameObjectWithTag("Background").GetComponent<Image>();
-            originalBGColor = new Color(uiImage.color.r, uiImage.color.g, uiImage.color.b);
+            originalBGColor = new Color(uiImage.color.r, uiImage.color.g, uiImage.color.b); //Save original background color for reversion 
             //DontDestroyOnLoad(instance);
         }
         else
@@ -55,7 +59,8 @@ public class Global : MonoBehaviour
     private void Start()
     {
         staticValues = GameObject.FindGameObjectWithTag("StaticValues").GetComponent<StaticValues>();
-        if (staticValues.seed == null)
+        
+        if (staticValues.seed == "")
         {
             staticValues.seed = Random.Range(0, 1000000).ToString();
         }
@@ -63,7 +68,12 @@ public class Global : MonoBehaviour
         Debug.Log(seed);
 
         Random.InitState(seed); //Seed
-        Scenario ChosenScenario = ScenarioList(staticValues.scenario);
+
+        Debug.Log(staticValues.blueWires);
+        Debug.Log(staticValues.redWires);
+        Debug.Log(staticValues.yellowWires);
+
+        Scenario ChosenScenario = ScenarioList(staticValues.scenario, staticValues.blueWires, staticValues.redWires, staticValues.yellowWires);
         camera = GameObject.FindGameObjectWithTag("UI").GetComponent<Canvas>().worldCamera;
         wires = GameObject.FindGameObjectsWithTag("Wire");
 
@@ -76,50 +86,57 @@ public class Global : MonoBehaviour
         Connectors = GameObject.FindGameObjectsWithTag("Connector");
 
         mainCamera.GetComponent<Colorblind>().Type = staticValues.colorFilter;
-
     }
 
-    private Scenario ScenarioList(int pickedScenario)
+    private Scenario ScenarioList(int pickedScenario, bool blue, bool red, bool yellow)
     {
         Scenario scenario = new Scenario();
+
+        if (blue == false) { scenario.setBlack(false); }
+        if (red == false) { scenario.setRed(false); }
+        if (yellow == false) { scenario.setYellow(false); }
+
+        //scenario.setYellow(false);
+
         switch (pickedScenario)
         {
             case 0:
-                //Scenario 0 (Base Scenario)
+                //Easy
                 scenario.setGen(2);
                 scenario.setCon(10);
                 break;
             case 1:
-                //Scenario 1 (No Super, Only 2 Gens)
+                //Normal
                 scenario.setGen(2);
                 scenario.setCon(20);
-                scenario.setYellow(false);
                 break;
             case 2:
-                //Scenario 2
+                //Hard
                 scenario.setGen(3);
                 scenario.setCon(30);
-                scenario.setYellow(false);
-                scenario.setRed(false);
                 break;
             case 100:
                 //Tutorial
+                scenario.setBlack(true);    //Ensures all wire types are available for the tutorial
+                scenario.setRed(true);
+                scenario.setYellow(true);
                 scenario.setGen(1);
                 scenario.setCon(5);
-                Tutorial.SetActive(true);   //May update to a tutorial class object insteads
+                Tutorial.SetActive(true);
                 break;
             default:
                 //Fallen Through
                 Debug.Log("SCENARIO NOT RECOGNISED!");
                 break;
         }
+        
         return scenario;
     }
 
     private void Update()
     {
 
-        if (connector)
+        if (connector)  //Darken background if a wire is being connected
         {
             uiImage.color = new Color(originalBGColor.r, originalBGColor.g, originalBGColor.b, 0.4f);
         }
@@ -132,17 +149,16 @@ public class Global : MonoBehaviour
         {
             //Debug.Log(Input.mousePosition);
         }
+
         if (Input.GetMouseButtonDown(1)) //Right Click
         {
-            if (connector)
+            if (connector) //Revert the connector to it's original color 
             {
                 connector.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
                 Debug.Log("Connector changed to white!");
             }
             RedistributePower();
         }
-
-
     }
 
     public void RedistributePower()
@@ -173,15 +189,15 @@ public class Global : MonoBehaviour
         }
     }
 
+    //Generation of scene objects based on the scenario selected
     public void Generate(Scenario scenario)
-    {
-
+    { 
         GridObject[,] grid = new GridObject[36, 20];
         grid = GridManager(grid);
 
+        //Randomly generates background sprites 
         foreach (GridObject gridSpace in grid)
         {
-
             if (Random.Range(0, 100) < 15 && gridSpace.getY() > 100)
             {
                 GameObject obj = Instantiate(BGObject, camera.ScreenToWorldPoint(new Vector3(gridSpace.getX(), gridSpace.getY(), 120)), Quaternion.identity, this.transform);
@@ -189,6 +205,7 @@ public class Global : MonoBehaviour
             }
         }
 
+        //Handles the wire types selected for the scenario
         for (int i = 0; i < wires.Length; i++)
         {
             if (wires[i].name == "S-Wire" && !scenario.getYellow()) { wires[i].SetActive(false); }
@@ -196,11 +213,13 @@ public class Global : MonoBehaviour
             if (wires[i].name == "B-Wire" && !scenario.getBlack()) { wires[i].SetActive(false); }
         }
 
+        //Generates generator objects according to the amount for the scene
         for (int gens = 0; gens < scenario.getGen(); gens++)
         {
             bool notValid = true;
             int x = 0;
             int y = 0;
+
             while (notValid)
             {
                 x = Random.Range(1, 35);
@@ -234,6 +253,7 @@ public class Global : MonoBehaviour
 
         }
 
+        //Generates generator objects according to the amount for the scene
         for (int cons = 0; cons < scenario.getCon(); cons++)
         {
             bool notValid = true;
@@ -350,16 +370,18 @@ public class Global : MonoBehaviour
         return grid;
     }
 
+    //Checks if any changes have been made to the amount of consumers powered
     public void ConsumerChange()
     {
         int on = 0;
-        for (int i = 0; i < Consumers.Length - 1; i++)
+        for (int i = 0; i < Consumers.Length; i++)
         {
             if (Consumers[i].GetComponent<Consumers>().isPowerOn())
             {
                 on += 1;
             }
         }
+
         if (consumersOn < on)
         {
             staticValues.GetComponent<AudioManager>().Play("PowerOn");
@@ -387,6 +409,7 @@ public class Global : MonoBehaviour
     {
         staticValues.GetComponent<AudioManager>().Play(sound);
     }
+    
     public int[] getTotalScore()
     {
         totalScore[0] = 0;

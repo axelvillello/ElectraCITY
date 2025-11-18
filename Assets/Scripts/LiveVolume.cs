@@ -1,3 +1,6 @@
+//Name: Live Volume
+//Description: Handles the updating of volume for audio in the UI
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +23,12 @@ public class LiveVolume : MonoBehaviour
         volumeSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
     }
 
+    //Updates the volume level 
     void ValueChangeCheck()
     {
         float newVolume = volumeSlider.value;
         textField.text = newVolume.ToString();
-        staticValues.volume = newVolume;
+        staticValues.SetVolume(newVolume);
         click.volume = newVolume/100;
         click.Play();
     }

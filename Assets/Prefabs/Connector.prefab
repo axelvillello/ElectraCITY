@@ -102,8 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91be5296071ea04c857e292c06eacec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selected: 0
+  isDragging: 0
   lineRenderer: {fileID: -2143393830596036527}
   otherConnector: {fileID: 0}
+  length: 0
 --- !u!58 &5585420954728698018
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,9 +1,7 @@
-//Name: Tutorial System
+//Name: Tutorial 
 //Description: Defines the logic of the tutorial
-//Author: Axel Ello
 
 using System.Collections;
-using System.Numerics;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour
@@ -53,6 +51,7 @@ public class Tutorial : MonoBehaviour
                 case 15:
                     tutorialCursor.SetActive(false);
                     break;
+                /*
                 case 26:
                     tutorialCursor.transform.position = tutGenerator.transform.position + new UnityEngine.Vector3(0, 200, 0);
                     tutorialCursor.SetActive(true);
@@ -63,6 +62,7 @@ public class Tutorial : MonoBehaviour
                 case 30:
                     tutorialCursor.SetActive(false);
                     break;
+                */
                 default:
                     break;
             }
@@ -76,6 +76,7 @@ public class Tutorial : MonoBehaviour
             }
     }
 
+    //Moves tutorial cursor
     private void MoveCursor(GameObject target)
     { 
         float width = target.GetComponent<RectTransform>().rect.width;
@@ -98,11 +99,10 @@ public class Tutorial : MonoBehaviour
             }
         }
 
-            closest.GetComponent<Generators>().setTutorialObjectStatus(true);
+        closest.GetComponent<Generators>().setTutorialObjectStatus(true);
 
         return closest;
-}
-
+    }
 
     private IEnumerator IconBounceDelay()
     {
@@ -116,5 +116,4 @@ public class Tutorial : MonoBehaviour
 
         isBobbing = false;
     }
-
 }

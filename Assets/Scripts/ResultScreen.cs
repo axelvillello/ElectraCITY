@@ -1,3 +1,6 @@
+//Name: Result Screen
+//Description: Handles display of information in the results screen 
+
 using UnityEngine;
 using TMPro;
 
@@ -7,13 +10,13 @@ public class ResultScreen : MonoBehaviour
     private TextMeshProUGUI BaseScore, WireScore, BuildingCost, FinalScore; 
     private Global global;
     private int[] totalScore;
+
     void Start()
     {
         BaseScore = FinalScoreBoard.Find("BaseScore").GetComponent<TextMeshProUGUI>();
         WireScore = FinalScoreBoard.Find("WireScore").GetComponent<TextMeshProUGUI>();
         BuildingCost = FinalScoreBoard.Find("BuildingCost").GetComponent<TextMeshProUGUI>();
         FinalScore = FinalScoreBoard.Find("FinalScore").GetComponent<TextMeshProUGUI>();
-
         global = GameObject.FindGameObjectWithTag("Global").GetComponent<Global>();
     }
 

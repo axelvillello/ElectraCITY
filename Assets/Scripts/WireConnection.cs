@@ -1,9 +1,8 @@
+//Name: Wire Connection
+//Description: Defines logic for handling wires placed into connector(s)
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WireConnection : MonoBehaviour
 {

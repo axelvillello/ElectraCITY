@@ -98,7 +98,7 @@
         },
         {
             "id": 19,
-            "content": "Electricity can travel from one building to the next.",
+            "content": "Electricity can travel from one building to the next to create a powerline.",
             "retraceSteps": 0
         },
         {
@@ -108,71 +108,41 @@
         },
         {
             "id": 21,
-            "content": "Continue to connect buildings together with blue wires.",
+            "content": "You can achieve this with any of the wire types.",
             "retraceSteps": 0
         },
         {
             "id": 22,
-            "content": "Uh-oh! A wire was connected, but the building did not receive power.",
+            "content": "However, only use more expensive wires if your powerline's resistance is too high.",
             "retraceSteps": 0
         },
         {
             "id": 23,
-            "content": "This is because the total resistance of connect wires cannot allow for more electricity to flow further.",
+            "content": "You may not need to use them, but in harder scenarios managing your powerline resistance is important!",
             "retraceSteps": 0
         },
         {
             "id": 24,
-            "content": "When using wires with resistance, the amount of electricity leaving the building to the next one will be lower.",
-            "retraceSteps": 0
-        },
-        {
-            "id": 25,
-            "content": "Let's lower the resistance of the circuit!",
-            "retraceSteps": 0
-        },
-        {
-            "id": 26,
-            "content": "Grab the wire connected to the generator, then right-click to delete it.",
-            "retraceSteps": 0
-        },
-        {
-            "id": 27,
-            "content": "Now replace the deleted blue wire with a red one instead!",
-            "retraceSteps": 0
-        },
-        {
-            "id": 28,
-            "content": "Red wires have lower resistance than blue wires.",
-            "retraceSteps": 0
-        },
-        {
-            "id": 29,
-            "content": "This means there is more electricity leaving the powered building than when you used the blue wire!",
-            "retraceSteps": 0
-        },
-        {
-            "id": 30,
             "content": "You now know the basics of ElectraCITY!",
             "retraceSteps": 0
         },
         {
-            "id": 31,
+            "id": 25,
             "content": "Press finish whenever you feel ready.",
             "retraceSteps": 0
         },
         {
-            "id": 32,
-            "content": "Feel free to try out the yellow wire.",
+            "id": 26,
+            "content": "Feel free to try out other two wires.",
             "retraceSteps": 0
         },
         {
-            "id": 33,
+            "id": 27,
             "content": "Or you return to the main menu and press START to try a real game!",
             "retraceSteps": 0
         },
         {
-            "id": 34,
+            "id": 28,
             "content": "CLOSE DIALOGUE",
             "retraceSteps": 0
         }

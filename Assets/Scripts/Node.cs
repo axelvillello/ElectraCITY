@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+//Name: Node
+//Description: Handles variables required to define an individual consumer within a tree of connections
+
 using UnityEngine;
 
 public class Node

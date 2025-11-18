@@ -1,10 +1,9 @@
-using System.Collections;
+//Name: Consumers
+//Description: Handling of visuals and variables for each consumer gameobject
+
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Consumers : MonoBehaviour
 {
@@ -24,9 +23,7 @@ public class Consumers : MonoBehaviour
 
     private void Awake()
     {
-        //Instatiate Variables
         PowerOn = false; //Default Draw
-        
         inGen = false;
     }
 
@@ -36,11 +33,12 @@ public class Consumers : MonoBehaviour
         global = GameObject.FindGameObjectWithTag("Global").GetComponent<Global>();
         tmp.text = pointValue.ToString();
         transform.GetComponent<ConnectorGen>().GenerateConnectors();
-        genSpriteID = checkSprite(pointValue);
-        this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites[genSpriteID];
-        this.transform.GetChild(0).GetComponent<SpriteRenderer>().color = randomColor(this.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
+        genSpriteID = checkSprite(pointValue); //Obtain ID of sprite based on point value of consumer
+        this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = sprites[genSpriteID]; 
+        this.transform.GetChild(0).GetComponent<SpriteRenderer>().color = randomColor(this.transform.GetChild(0).GetComponent<SpriteRenderer>().color); //Applies a random color to sprite
     }
 
+    //Handles the lightbulb sprite based on if the consumer power status
     public void reDraw()
     {
         if (isPowerOn())
@@ -58,6 +56,8 @@ public class Consumers : MonoBehaviour
         this.pointValue = pointValue;
         tmp.text = pointValue.ToString();
     }
+
+    //Applies ID of appropriate sprite (point values with multiple sprites are randomly selected)
     private int checkSprite(int comparedPoints)
     {
         int spriteID = 0;
@@ -127,6 +127,7 @@ public class Consumers : MonoBehaviour
     }
 
     public bool isPowerOn() { return PowerOn; }
+
     public void setPowerOn(bool power)
     {
         if (PowerOn != power)
@@ -137,6 +138,8 @@ public class Consumers : MonoBehaviour
     }
 
     public int getPowerPercent() {  return PowerPercent; }
+
+    //Adds "electrical power" value to the consumer and determines if it is turned on
     public void addPowerPercent(int percent)
     {
         PowerPercent += percent;

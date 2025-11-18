@@ -1,4 +1,6 @@
-using UnityEngine.Audio;
+//Name: Sounds
+//Description: Defines a component for attaching audio to gameobjects
+
 using UnityEngine;
 using System;
 

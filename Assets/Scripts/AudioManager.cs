@@ -1,4 +1,6 @@
-using UnityEngine.Audio;
+//Name: Audio Manager
+//Description: Handling and loading of all sounds to be played
+
 using System;
 using UnityEngine;
 

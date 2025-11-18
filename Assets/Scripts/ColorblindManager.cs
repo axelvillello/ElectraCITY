@@ -1,3 +1,6 @@
+//Name: Colorblind Manager
+//Description: Attached to main camera to render filters. Defines handling of color filter inputs
+
 using UnityEngine;
 using TMPro;
 using Wilberforce;
@@ -19,21 +22,22 @@ public class ColorblindManager : MonoBehaviour
 
     void Update()
     {
+        //Check for color filter value each frame
         switch (staticValues.colorFilter)
         {
-            case 0:
+            case 0: //Default (off)
                 colorFilter.Type = 0;
                 break;
 
-            case 1:
+            case 1: //Red filter
                 colorFilter.Type = 1;
                 break;
 
-            case 2:
+            case 2: //Green filter
                 colorFilter.Type = 2;
                 break;
 
-            case 3:
+            case 3: //Blue filter
                 colorFilter.Type = 3;
                 break;
         }
@@ -41,6 +45,7 @@ public class ColorblindManager : MonoBehaviour
         inputColorFilter.RefreshShownValue();
     }
 
+    //Call for changing the color filter value
     private void UpdateColorFilter(int input)
     {
 
