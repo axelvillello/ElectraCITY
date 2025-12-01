@@ -16,3 +16,5 @@
 **/Assets/Images/Consumers** - Consumer object sprites (buildings)  <br>
 **/Assets/Prefabs** - Prefabricated game objects <br>
 **/Assets/Resources** - Miscellaneous files, currently contains JSON for tutorial dialogue <br>
+**/Assets/Scenes** - .Unity files for each game scene <br>
+**/Assets/Scripts** - C# scripts <br>
