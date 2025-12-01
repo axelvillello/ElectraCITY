@@ -18,3 +18,9 @@
 **/Assets/Resources** - Miscellaneous files, currently contains JSON for tutorial dialogue <br>
 **/Assets/Scenes** - .Unity files for each game scene <br>
 **/Assets/Scripts** - C# scripts <br>
+## Prefabs
+## Scenes
+## Main Game Systems
+## Known Bugs
+- Colorblind filter does not apply correctly when using a URP asset in the render pipeline (URP currently removed from pipeline)
+- 2D Light does not render correctly for generated consumer objects (URP removal means this is currently disabled by default)
