@@ -19,8 +19,14 @@
 **/Assets/Scenes** - .Unity files for each game scene <br>
 **/Assets/Scripts** - C# scripts <br>
 ## Prefabs
+**BGObject** - Background objects for the main game scene. Composed of a blank square sprite. Upon starting a game session, a number of these objects are generated via Global.cs with a random sprite.
+**Connector**
+**Consumer**
+**Generator**
+**Global**
+**OptionsMenu**
+**UI**
 ## Scenes
-## Main Game Systems
 ## Known Bugs
 - Colorblind filter does not apply correctly when using a URP asset in the render pipeline (URP currently removed from pipeline)
 - 2D Light does not render correctly for generated consumer objects (URP removal means this is currently disabled by default)
