@@ -202,6 +202,9 @@ public class Global : MonoBehaviour
             {
                 GameObject obj = Instantiate(BGObject, camera.ScreenToWorldPoint(new Vector3(gridSpace.getX(), gridSpace.getY(), 120)), Quaternion.identity, this.transform);
                 obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteLibrary>().GetSprite("BGObjects", Random.Range(1, 4).ToString());
+                Color colorOpacity = obj.GetComponent<SpriteRenderer>().color;
+                colorOpacity.a = 0.8f;
+                obj.GetComponent<SpriteRenderer>().color = colorOpacity;
             }
         }
 

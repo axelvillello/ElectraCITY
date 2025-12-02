@@ -53,7 +53,7 @@ public class Generators : MonoBehaviour
             }
             else if (currentObject.tag == "Consumer")
             {
-                //currentObject.gameObject.GetComponent<Consumers>().setInGen(true);
+                currentObject.gameObject.GetComponent<Consumers>().setInGen(true);
 
                 //How many used connections in the object
                 Node[] toSort = new Node[currentObject.transform.childCount];
