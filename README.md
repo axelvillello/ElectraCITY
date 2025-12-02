@@ -19,13 +19,13 @@
 **/Assets/Scenes** - .Unity files for each game scene <br>
 **/Assets/Scripts** - C# scripts <br>
 ## Prefabs
-**BGObject** - Background objects for the main game scene. Composed of a blank square sprite. Upon starting a game session, a number of these objects are generated via Global.cs with a random sprite.
-**Connector**
-**Consumer**
-**Generator**
-**Global**
-**OptionsMenu**
-**UI**
+**BGObject** - Background objects for the main game scene. Composed of a blank square sprite. Upon starting a game session, a number of these objects are generated via Global.cs with a random sprite. <br>
+**Connector** - Circles that generate below consumers and generators, allowing for wires to be attached between these objects. 1-3 are generated per object randomly via Global.cs. 
+**Consumer** - Consumer objects for the main game scene (buildings). They provide score when power is successfully supplied to them. These are composed of a large blank square to hold the consumer's main sprite, a lightbulb prefab that communicates if the consumer has received power, and a smaller square with a text element to hold the consumer's score. These are randomly generated in Global.cs with the amount of consumers dictated by conCount in Scenario.cs. 
+**Generator** - Generator objects for the main game scene. They provide power to connected consumers. These are composed of a preset generator sprite. The amount of these per generated scenario is dictated by genCount in Scenario.cs.
+**Global** - Gameobject for storing "global" functions for main game logic in the main scene. Composed of Global.cs.
+**OptionsMenu** - Options menu UI used in both game scenes. Contains various options that store values in an object that uses StaticValues.cs to determine global variables throughout runtime. 
+**UI** - Main game scene UI. Contains background image and wire options.
 ## Scenes
 ## Known Bugs
 - Colorblind filter does not apply correctly when using a URP asset in the render pipeline (URP currently removed from pipeline)
