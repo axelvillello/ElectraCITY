@@ -49,7 +49,42 @@ Main game scene. Contains all consumers and generators with connectors that are 
 | ConnectorGen.cs | Generates connector dots below after the generation of power generator and consumer prefabs. |
 | Consumers.cs | Randomly assign point values of each consumer is set to a unique instance of this class per consumer object. |
 ### Power Management
+| Source File | Usage |
+| --- | --- |
+| Global.cs | |
+| Generators.cs | |
+| Consumers.cs | |
+| AudioManager.cs | |
 ### Wire Mechanics 
+| Source File | Usage |
+| --- | --- |
+| WireConnection.cs | |
+| Global.cs | |
 ### Scoring
+| Source File | Usage |
+| --- | --- |
+| Global.cs | |
+| Consumers.cs | | 
+| Generators.cs | |
+| Node.cs | |
+| WireConnection.cs | |
+| UI.cs | |
 ### Tutorial
+| Source File | Usage |
+| --- | --- |
+| Global.cs | |
+| Tutorial.cs | |
+| Dialogue.cs | |
 ### Menu Navigation
+| Source File | Usage |
+| --- | --- |
+| StaticValues.cs | |
+| MenuButtons.cs | |
+| AudioManager.cs | |
+| ColorblindManager.cs | |
+| FontLoader.cs | |
+| FontManager.cs | |
+| LiveVolume.cs | |
+| OptionsFonts.cs | |
+| Tooltips.cs | |
+| TxtSpeedManager.cs | |
