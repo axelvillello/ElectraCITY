@@ -19,7 +19,8 @@
 **/Assets/Scenes** - .Unity files for each game scene <br>
 **/Assets/Scripts** - C# scripts <br>
 ## Prefabs
-**BGObject** - Background objects for the main game scene. Composed of a blank square sprite. Upon starting a game session, a number of these objects are generated via Global.cs with a random sprite. <br>
+### BGObject
+Background objects for the main game scene. Composed of a blank square sprite. Upon starting a game session, a number of these objects are generated via Global.cs with a random sprite. <br>
 **Connector** - Circles that generate below consumers and generators, allowing for wires to be attached between these objects. 1-3 are generated per object randomly via Global.cs. <br>
 **Consumer** - Consumer objects for the main game scene (buildings). They provide score when power is successfully supplied to them. These are composed of a large blank square to hold the consumer's main sprite, a lightbulb prefab that communicates if the consumer has received power, and a smaller square with a text element to hold the consumer's score. These are randomly generated in Global.cs with the amount of consumers dictated by conCount in Scenario.cs. <br>
 **Generator** - Generator objects for the main game scene. They provide power to connected consumers. These are composed of a preset generator sprite. The amount of these per generated scenario is dictated by genCount in Scenario.cs. <br>
