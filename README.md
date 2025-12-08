@@ -59,8 +59,9 @@ Main game scene. Contains all consumers and generators with connectors that are 
 ### Wire Mechanics 
 | Source File | Usage |
 | --- | --- |
-| WireConnection.cs | |
-| Global.cs | |
+| WireAttach.cs | Logic for maintaining the values that define different types of wires when selecting wires and attaching wires to a connector. |
+| WireConnection.cs | Logic for gameplay behaviours when connecting a wire to a connector(s) under various circumstances. Handles rendering of wires based on wire selected. |
+| Global.cs | Contains variables defined by logic in WireAttach.cs to be used by WireConnection.cs. |
 ### Scoring
 | Source File | Usage |
 | --- | --- |
