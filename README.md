@@ -43,7 +43,11 @@ Main game scene. Contains all consumers and generators with connectors that are 
 | Source File | Usage |
 | --- | --- |
 | Global.cs | Contains logic for randomly generating the game board with regards selected difficulty (includes tutorial), and generation seed (random if not defined by the user). |
-| StaticValues.cs | Contains seed (Default: undefined), the integer that defines the selected difficulty, and availability of each wire type (Default: true) |
+| StaticValues.cs | Contains seed (Default: undefined), the integer that defines the selected difficulty, and availability of each wire type (Default: true). |
+| Scenario.cs | Variables set to define a scenario based on the difficulty selected. Maintains the number of generators, number of consumers and available wires for the generated scenario. |
+| GridObject.cs | Definition of a 2D grid to occupy generated objects. Used to check if grid spaces are currently occupied to ensure no clipping of objects. |
+| ConnectorGen.cs | Generates connector dots below after the generation of power generator and consumer prefabs. |
+| Consumers.cs | Randomly assign point values of each consumer is set to a unique instance of this class per consumer object. |
 ### Power Management
 ### Wire Mechanics 
 ### Scoring
