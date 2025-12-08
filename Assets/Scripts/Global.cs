@@ -123,6 +123,8 @@ public class Global : MonoBehaviour
                 scenario.setGen(1);
                 scenario.setCon(5);
                 Tutorial.SetActive(true);
+
+                Random.InitState(1);        //Ensures tutorial is of a consistent generation seed
                 break;
             default:
                 //Fallen Through
@@ -185,7 +187,7 @@ public class Global : MonoBehaviour
     {
         for (int i = 0; i < Consumers.Length; i++)
         {
-            Consumers[i].GetComponent<Consumers>().PowerReset();
+            Consumers[i].GetComponent<Consumers>().PowerReset();    //Turns off power to consumer
         }
     }
 
@@ -203,7 +205,7 @@ public class Global : MonoBehaviour
                 GameObject obj = Instantiate(BGObject, camera.ScreenToWorldPoint(new Vector3(gridSpace.getX(), gridSpace.getY(), 120)), Quaternion.identity, this.transform);
                 obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteLibrary>().GetSprite("BGObjects", Random.Range(1, 4).ToString());
                 Color colorOpacity = obj.GetComponent<SpriteRenderer>().color;
-                colorOpacity.a = 0.8f;
+                colorOpacity.a = 0.65f;
                 obj.GetComponent<SpriteRenderer>().color = colorOpacity;
             }
         }
@@ -256,7 +258,7 @@ public class Global : MonoBehaviour
 
         }
 
-        //Generates generator objects according to the amount for the scene
+        //Generates consumer objects according to the amount for the scene
         for (int cons = 0; cons < scenario.getCon(); cons++)
         {
             bool notValid = true;
