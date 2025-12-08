@@ -51,10 +51,11 @@ Main game scene. Contains all consumers and generators with connectors that are 
 ### Power Management
 | Source File | Usage |
 | --- | --- |
-| Global.cs | |
-| Generators.cs | |
-| Consumers.cs | |
-| AudioManager.cs | |
+| Global.cs | Medium for communicating game actions that change the status of powered objects. |
+| Generators.cs | Manages objects connected in a line with by finding all consumers connected to a generator to form a powerline. The value of power supplied to each consumer is managed here. |
+| Node.cs | Representation of an individual object within a powerline tree. Maintains the objects resistance. |
+| Consumers.cs | Maintains the power status of individual objects including the amount of power supplied and if the consumer is considered as powered on. |
+| AudioManager.cs | Plays a sound if power status of a consumer is changed. Sounds for powering on and off are unique. |
 ### Wire Mechanics 
 | Source File | Usage |
 | --- | --- |
