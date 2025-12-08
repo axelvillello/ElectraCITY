@@ -83,6 +83,7 @@ Main game scene. Contains all consumers and generators with connectors that are 
 | MenuButtons.cs | Defines behaviour of menu navigations, including specific interactions for the start scenario, options menu and tutorial buttons. Includes specific behaviours hovering over interactable UI components. |
 | AudioManager.cs | Method for loading and playing all used sounds. |
 | ColorblindManager.cs | Maintains the application of different color filters based on selected values. |
+| ColorLoader.cs | Reloads the color filter for the main menu scene. |
 | FontLoader.cs | Reloads font of text components that are inactive in a loaded scene. |
 | FontManager.cs | Maintains the currently selected font and applies it to all text components. |
 | LiveVolume.cs | Maintains the volume of played audio and enables this value to be changed in realtime. |
