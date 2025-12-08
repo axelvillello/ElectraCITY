@@ -52,8 +52,8 @@ Main game scene. Contains all consumers and generators with connectors that are 
 | Source File | Usage |
 | --- | --- |
 | Global.cs | Medium for communicating game actions that change the status of powered objects. |
-| Generators.cs | Manages objects connected in a line with by finding all consumers connected to a generator to form a powerline. The value of power supplied to each consumer is managed here. |
-| Node.cs | Representation of an individual object within a powerline tree. Maintains the objects resistance. |
+| Generators.cs | Manages objects connected in a line with by finding all consumers connected to a generator to form a powerline. The value of power supplied to each consumer is managed here. Each consumer is represented using Node.cs. |
+| Node.cs | Representation of an individual object within a powerline tree. Maintains the object's resistance. |
 | Consumers.cs | Maintains the power status of individual objects including the amount of power supplied and if the consumer is considered as powered on. |
 | AudioManager.cs | Plays a sound if power status of a consumer is changed. Sounds for powering on and off are unique. |
 ### Wire Mechanics 
@@ -65,9 +65,9 @@ Main game scene. Contains all consumers and generators with connectors that are 
 ### Scoring
 | Source File | Usage |
 | --- | --- |
-| Global.cs | Calculates the total score of powerlines, and score penalty of used wires. |
+| Global.cs | Calculates the total score of powerlines, and score penalty of used wires. Values are provided by Generators.cs. |
 | Consumers.cs | Determines the base score of an individual consumer object. | 
-| Generators.cs | Calculates total cost of wires used within a powerline in regards to the wire type and length of wire used. |
+| Generators.cs | Calculates total cost of wires used within a powerline in regards to the wire type and length of wire used as defined in Node.cs. |
 | Node.cs | Contains cost of wire placed into a node and the length of the wire used. |
 | UI.cs | Updates game UI to display the score to the user. |
 ### Tutorial
@@ -79,7 +79,7 @@ Main game scene. Contains all consumers and generators with connectors that are 
 ### Menus & Settings
 | Source File | Usage |
 | --- | --- |
-| StaticValues.cs | Global variables for each option menu option. |
+| StaticValues.cs | Global variables for each setting in the options menu. |
 | MenuButtons.cs | Defines behaviour of menu navigations, including specific interactions for the start scenario, options menu and tutorial buttons. Includes specific behaviours hovering over interactable UI components. |
 | AudioManager.cs | Method for loading and playing all used sounds. |
 | ColorblindManager.cs | Maintains the application of different color filters based on selected values. |
@@ -87,5 +87,6 @@ Main game scene. Contains all consumers and generators with connectors that are 
 | FontManager.cs | Maintains the currently selected font and applies it to all text components. |
 | LiveVolume.cs | Maintains the volume of played audio and enables this value to be changed in realtime. |
 | OptionsFonts.cs | Listener class for font manager when selecting fonts in the options menu. |
+| ResultsScreen.cs | Populates the results screen with the score values from Global.cs. |
 | Tooltips.cs | Tooltip components that appear on hovering over the gameobject it's attached to.  |
-| TxtSpeedManager.cs | Maintains the speed of dialogue text scroll in the tutorial. |
+| TxtSpeedManager.cs | Maintains the speed of dialogue text scroll in Dialogue.cs. |
