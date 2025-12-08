@@ -190,10 +190,8 @@ public class WireConnection : MonoBehaviour
                 selected = true;
 
                 length = (int)(global.connector.transform.position - transform.position).magnitude;
-
             }
         }
-
     }
 
     public int getResistance() {return resistance;}
