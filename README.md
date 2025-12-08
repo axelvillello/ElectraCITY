@@ -65,28 +65,27 @@ Main game scene. Contains all consumers and generators with connectors that are 
 ### Scoring
 | Source File | Usage |
 | --- | --- |
-| Global.cs | |
-| Consumers.cs | | 
-| Generators.cs | |
-| Node.cs | |
-| WireConnection.cs | |
-| UI.cs | |
+| Global.cs | Calculates the total score of powerlines, and score penalty of used wires. |
+| Consumers.cs | Determines the base score of an individual consumer object. | 
+| Generators.cs | Calculates total cost of wires used within a powerline in regards to the wire type and length of wire used. |
+| Node.cs | Contains cost of wire placed into a node and the length of the wire used. |
+| UI.cs | Updates game UI to display the score to the user. |
 ### Tutorial
 | Source File | Usage |
 | --- | --- |
-| Global.cs | |
-| Tutorial.cs | |
-| Dialogue.cs | |
-### Menu Navigation
+| Global.cs | Manages whether tutorial components are to be used in the scenario and generates accordingly. |
+| Tutorial.cs | Behaviours for the cursor object in the tutorial involving it's relocation and visibility during certain dialogue steps. |
+| Dialogue.cs | Behaviours for the dialogue box within the tutorial. Populates dialogue box with tutorial text from Tutorial.json. Indicates when dialogue can be clicked through. |
+### Menus & Settings
 | Source File | Usage |
 | --- | --- |
-| StaticValues.cs | |
-| MenuButtons.cs | |
-| AudioManager.cs | |
-| ColorblindManager.cs | |
-| FontLoader.cs | |
-| FontManager.cs | |
-| LiveVolume.cs | |
-| OptionsFonts.cs | |
-| Tooltips.cs | |
-| TxtSpeedManager.cs | |
+| StaticValues.cs | Global variables for each option menu option. |
+| MenuButtons.cs | Defines behaviour of menu navigations, including specific interactions for the start scenario, options menu and tutorial buttons. Includes specific behaviours hovering over interactable UI components. |
+| AudioManager.cs | Method for loading and playing all used sounds. |
+| ColorblindManager.cs | Maintains the application of different color filters based on selected values. |
+| FontLoader.cs | Reloads font of text components that are inactive in a loaded scene. |
+| FontManager.cs | Maintains the currently selected font and applies it to all text components. |
+| LiveVolume.cs | Maintains the volume of played audio and enables this value to be changed in realtime. |
+| OptionsFonts.cs | Listener class for font manager when selecting fonts in the options menu. |
+| Tooltips.cs | Tooltip components that appear on hovering over the gameobject it's attached to.  |
+| TxtSpeedManager.cs | Maintains the speed of dialogue text scroll in the tutorial. |
